@@ -1,6 +1,6 @@
 <?php
 
-include "bot.php";
+
 define("api", "https://api.telegram.org/bot" .token. "/");
 $data = file_get_contents("php://input");
 $update = json_decode($data, true);
