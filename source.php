@@ -1,7 +1,8 @@
 <?php
 
+$token = "668920983:AAH5OAvntJoUGWEDjE9CKQ9P4nQdY5MybxI";
 
-define("api", "https://api.telegram.org/bot" .token. "/");
+define('api', "https://api.telegram.org/bot" . $token . "/");
 $data = file_get_contents("php://input");
 $update = json_decode($data, true);
 
@@ -15,7 +16,7 @@ $text = $message['text'];
 $cid = $update['message']['from']['id'];
 
 function apiRequest($metodo){
-    $req = file_get_contents(api . $metodo);
+    $req = file_get_contents(api.$metodo);
     return $req;
 }
 
