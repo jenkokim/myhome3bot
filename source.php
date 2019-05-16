@@ -6,7 +6,7 @@ $data = file_get_contents("php://input");
 $update = json_decode($data, true);
 
 
-
+echo "ciao";
 $message = $update['message'];
 $text = $message['text'];
 $cid = $update['message']['from']['id'];
