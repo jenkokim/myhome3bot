@@ -1,4 +1,7 @@
 <?php
+define('token', "668920983:AAH5OAvntJoUGWEDjE9CKQ9P4nQdY5MybxI");
+
+
 define('api' , "https://api.telegram.org/bot" .token . "/");
 $data = file_get_contents("php://input");
 $update = json_decode($data, true);
@@ -19,7 +22,9 @@ function send($id, $text){
 }
 
 
-
+if ($text == "/start") {
+    send($cid, 'Benvenuto sul bot');
+}
 
 
 
