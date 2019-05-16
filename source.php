@@ -1,12 +1,17 @@
 <?php
 
-
+include "bot.php";
 define("api", "https://api.telegram.org/bot" .token. "/");
 $data = file_get_contents("php://input");
 $update = json_decode($data, true);
 
-
+echo api;
 echo "ciao";
+var_dump($data);
+var_dump($update);
+
+var_dump(token);
+
 $message = $update['message'];
 $text = $message['text'];
 $cid = $update['message']['from']['id'];
