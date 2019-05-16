@@ -15,7 +15,7 @@ function send($id, $text){
      if(strpos($text,"\n")){
          $text=urlencode($text);
      }
-     return apiRequest("sendMessage?text&parse_mode=HTML&chat_id=$id");
+     return apiRequest("sendMessage?text=$text&parse_mode=HTML&chat_id=$id");
 }
 
 
