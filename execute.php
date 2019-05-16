@@ -1,14 +1,13 @@
 <?php
-define('token', "668920983:AAH5OAvntJoUGWEDjE9CKQ9P4nQdY5MybxI");
-
+include "bot.php";
 
 define('api' , "https://api.telegram.org/bot" .token . "/");
 $data = file_get_contents("php://input");
 $update = json_decode($data, true);
 
 $message = $update['message'];
-$text = $message['text'];
-$cid = $update['message']['from']['id'];
+$text = $message['text'] ? $message['text'] : "";
+$cid = $update['message']['from']['id']? $update['message']['from']['id']:"";
 
 function apiRequest($metodo){
     $req= file_get_contents(api.$metodo);
