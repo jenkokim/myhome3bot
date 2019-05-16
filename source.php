@@ -1,25 +1,26 @@
 <?php
 
 
-define('api' , "https://api.telegram.org/bot" .token . "/");
+define("api", "https://api.telegram.org/bot" .token. "/");
 $data = file_get_contents("php://input");
 $update = json_decode($data, true);
 
-$text="";
-$cid="";
+
+
 $message = $update['message'];
 $text = $message['text'];
 $cid = $update['message']['from']['id'];
 
 function apiRequest($metodo){
-    $req= file_get_contents(api.$metodo);
+    $req = file_get_contents(api . $metodo);
     return $req;
 }
+
 function send($id, $text){
-     if(strpos($text,"\n")){
-         $text=urlencode($text);
-     }
-     return apiRequest("sendMessage?text=$text&parse_mode=HTML&chat_id=$id");
+    if (strpos($text, '\n')) {
+        $text = urlencode($text);
+    }
+    return apiRequest("sendMessage?text=$text&parse_mode=HTML&chat_id=$id");
 }
 
 
