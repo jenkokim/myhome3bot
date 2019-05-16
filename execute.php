@@ -23,6 +23,9 @@ function send($id, $text){
 }
 
 
+if ($text == "/start") {
+    send($cid, 'Benvenuto sul botttt');
+}
 
 
 
