@@ -29,6 +29,10 @@ function send($id, $text){
     return apiRequest("sendMessage?text=$text&parse_mode=HTML&chat_id=$id");
 }
 
+if ($text == "/start") {
+    send($cid, 'Benvenuto sul botttt');
+}
+
 
 
 
