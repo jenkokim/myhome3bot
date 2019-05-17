@@ -10,7 +10,7 @@ $update = json_decode($data, true);
 //var_dump($data);
 //var_dump($update);
 
-
+echo api;
 $message = $update['message'];
 $text = $message['text'];
 $cid = $update['message']['from']['id'];
