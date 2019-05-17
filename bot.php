@@ -1,9 +1,9 @@
 <?php
-//include "source.php";
+include "source.php";
 
+echo "asd";
 
+if ($text == "/start") {
+    send($cid, 'Benvenuto sul botttt');
+}
 
-//if ($text == "/start") {
-//    send($cid, 'Benvenuto sul botttt');
-//}
-//
