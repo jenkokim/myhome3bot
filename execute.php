@@ -4,6 +4,10 @@ $token = "668920983:AAH5OAvntJoUGWEDjE9CKQ9P4nQdY5MybxI";
 define('API_URL', "https://api.telegram.org/bot" . $token . "/");
 
 
+$content = file_get_contents("php://input");
+$update = json_decode($content, true);
+
+
 function apiRequestWebhook($method, $parameters) {
     if (!is_string($method)) {
         error_log("Method name must be a string\n");
@@ -18,6 +22,7 @@ function apiRequestWebhook($method, $parameters) {
     }
 
     $parameters["method"] = $method;
+
 
     header("Content-Type: application/json");
     echo json_encode($parameters);
