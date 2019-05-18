@@ -12,6 +12,7 @@ echo $update;
 $message = $update['message'];
 $text = $message['text'];
 $cid = $update['message']['from']['id'];
+$gid= $update['message']['chat']['id'];
 
 function apiRequest($metodo){
     $req = file_get_contents(api.$metodo);
@@ -38,8 +39,11 @@ function chat($id, $text){
 }
 
 if ($text == "/chat") {
-    send($cid, "Benvenuto sul bot, il tuo chat id è $cid");
+    send($gid, "il tuo chat id è $gid");
 }
+
+
+
 //568381122
 
 //$content = file_get_contents("php://input");
