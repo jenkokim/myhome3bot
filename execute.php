@@ -13,7 +13,9 @@ $message = $update['message'];
 $text = $message['text'];
 $cid = $update['message']['from']['id'];
 $gid = $update['message']['chat']['id'];
-
+$roccoid="";
+$roccoid=$cid;
+var_dump($roccoid);
 function apiRequest($metodo)
 {
     $req = file_get_contents(api . $metodo);
@@ -44,12 +46,10 @@ function chat($id, $text)
 if ($text == "/chat") {
     send($gid, "il tuo chat id è $gid");
 }
-$roccoid="";
 if($text == "/rocco") {
     send($cid, "il tuo chat id è $cid");
-    $roccoid=$cid;
 }
-echo $roccoid;
+
 
 $partecipanti = [
     'giovanni' => [
