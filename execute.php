@@ -3,6 +3,20 @@
 $token = "668920983:AAH5OAvntJoUGWEDjE9CKQ9P4nQdY5MybxI";
 define('api', "https://api.telegram.org/bot" . $token . "/");
 
+$partecipanti = [
+    'giovanni' => [
+        'id' => '354008242',
+        'chat_name' => 'Jenko😎'
+    ],
+    'rocco' => [
+        'id' => '126810558',
+        'chat_name' => 'rolud'
+    ],
+    'bruno' => [
+        'id' => '',
+        'chat_name' => ''
+    ],
+];
 
 $data = file_get_contents("php://input");
 $update = json_decode($data, true);
@@ -51,20 +65,7 @@ if($text == "/rocco") {
 }
 
 
-$partecipanti = [
-    'giovanni' => [
-        'id' => '354008242',
-        'chat_name' => 'Jenko😎'
-    ],
-    'rocco' => [
-        'id' => '126810558',
-        'chat_name' => 'rolud'
-    ],
-    'bruno' => [
-        'id' => '',
-        'chat_name' => ''
-    ],
-];
+
 var_dump($partecipanti);
 //568381122
 
