@@ -27,7 +27,7 @@ function send($id, $text){
 }
 
 if ($text == "/start") {
-    send($cid, 'Benvenuto sul bot');
+    send($cid, "Benvenuto sul bot, il tuo id è $cid");
 }
 
 
