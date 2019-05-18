@@ -73,7 +73,7 @@ if ($text == "/week") {
     $this_week=$turni[$year][$week];
     $week_team=$squadre[$this_week];
     echo $week_team;
-    send($groupid, "");
+    send('-260493788', $week_team);
 }
 
 
