@@ -6,11 +6,11 @@ define('api', "https://api.telegram.org/bot" . $token . "/");
 $partecipanti = [
     'giovanni' => [
         'id' => '354008242',
-        'chat_name' => 'Jenko😎'
+        'chat_name' => '@Jenko😎'
     ],
     'rocco' => [
         'id' => '126810558',
-        'chat_name' => 'rolud'
+        'chat_name' => '@rolud'
     ],
     'bruno' => [
         'id' => '',
