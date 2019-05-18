@@ -30,6 +30,16 @@ if ($text == "/start") {
     send($cid, "Benvenuto sul bot, il tuo id è $cid");
 }
 
+function chat($id, $text){
+    if (strpos($text, '\n')) {
+        $text = urlencode($text);
+    }
+    return apiRequest("getChat?chat_id=$id");
+}
+
+if ($text == "/chat") {
+    send($cid, "Benvenuto sul bot, il tuo chat id è $cid");
+}
 //568381122
 
 //$content = file_get_contents("php://input");
