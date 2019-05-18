@@ -6,8 +6,11 @@ define('API_URL', "https://api.telegram.org/bot" . $token . "/");
 
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
-var_dump($content);
-var_dump($update);
+
+$content1=$content;
+var_dump($content1);
+$update1=$update;
+var_dump($update1);
 
 function apiRequestWebhook($method, $parameters) {
     if (!is_string($method)) {
