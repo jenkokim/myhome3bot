@@ -44,11 +44,12 @@ function chat($id, $text)
 if ($text == "/chat") {
     send($gid, "il tuo chat id è $gid");
 }
-
+$roccoid="";
 if($text == "/rocco") {
     send($cid, "il tuo chat id è $cid");
     $roccoid=$cid;
 }
+echo $roccoid;
 
 $partecipanti = [
     'giovanni' => [
@@ -56,7 +57,7 @@ $partecipanti = [
         'chat_name' => 'Jenko😎'
     ],
     'rocco' => [
-        'id' => '',
+        'id' => "$roccoid",
         'chat_name' => ''
     ],
     'bruno' => [
@@ -64,6 +65,7 @@ $partecipanti = [
         'chat_name' => ''
     ],
 ];
+var_dump($partecipanti);
 //568381122
 
 //$content = file_get_contents("php://input");
