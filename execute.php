@@ -27,10 +27,10 @@ function send($id, $text){
 }
 
 if ($text == "/start") {
-    send($cid, "Benvenuto sul bot, il tuo id è $cid");
+    send('568381122', "Benvenuto sul bot, il tuo id è $cid");
 }
 
-
+//568381122
 
 //$content = file_get_contents("php://input");
 //$update = json_decode($content, true);
