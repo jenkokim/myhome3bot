@@ -12,15 +12,17 @@ echo $update;
 $message = $update['message'];
 $text = $message['text'];
 $cid = $update['message']['from']['id'];
-$gid= $update['message']['chat']['id'];
+$gid = $update['message']['chat']['id'];
 
-function apiRequest($metodo){
-    $req = file_get_contents(api.$metodo);
-    echo api.$metodo;
+function apiRequest($metodo)
+{
+    $req = file_get_contents(api . $metodo);
+    echo api . $metodo;
     return $req;
 }
 
-function send($id, $text){
+function send($id, $text)
+{
     if (strpos($text, '\n')) {
         $text = urlencode($text);
     }
@@ -31,7 +33,8 @@ if ($text == "/start") {
     send($cid, "Benvenuto sul bot, il tuo id è $cid");
 }
 
-function chat($id, $text){
+function chat($id, $text)
+{
     if (strpos($text, '\n')) {
         $text = urlencode($text);
     }
@@ -42,8 +45,25 @@ if ($text == "/chat") {
     send($gid, "il tuo chat id è $gid");
 }
 
+if($text == "/rocco") {
+    send($cid, "il tuo chat id è $cid");
+    $roccoid=$cid;
+}
 
-
+$partecipanti = [
+    'giovanni' => [
+        'id' => '354008242',
+        'chat_name' => 'Jenko😎'
+    ],
+    'rocco' => [
+        'id' => '',
+        'chat_name' => ''
+    ],
+    'bruno' => [
+        'id' => '',
+        'chat_name' => ''
+    ],
+];
 //568381122
 
 //$content = file_get_contents("php://input");
@@ -212,14 +232,6 @@ if ($text == "/chat") {
 //
 //
 //
-
-
-
-
-
-
-
-
 
 
 //$firstname = isset($message['chat']['first_name']) ? $message['chat']['first_name'] : "";
