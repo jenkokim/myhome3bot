@@ -7,7 +7,7 @@ define('api', "https://api.telegram.org/bot" . $token . "/");
 $data = file_get_contents("php://input");
 $update = json_decode($data, true);
 
-echo api;
+
 echo $update;
 $message = $update['message'];
 $text = $message['text'];
@@ -44,7 +44,7 @@ function chat($id, $text)
 }
 
 if ($text == "/chat") {
-    send($gid, "il tuo chat id è $gid");
+    send($gid, "il tuo chat id è $partecipanti");
 }
 if($text == "/rocco") {
     send($cid, "il tuo chat id è $cid");
@@ -57,8 +57,8 @@ $partecipanti = [
         'chat_name' => 'Jenko😎'
     ],
     'rocco' => [
-        'id' => "$roccoid",
-        'chat_name' => ''
+        'id' => '126810558',
+        'chat_name' => 'rolud'
     ],
     'bruno' => [
         'id' => '',
