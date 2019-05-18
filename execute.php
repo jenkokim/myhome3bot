@@ -1,8 +1,8 @@
 <?php
 
 $token = "668920983:AAH5OAvntJoUGWEDjE9CKQ9P4nQdY5MybxI";
-define('API_URL', "https://api.telegram.org/bot" . $token . "/");
-echo API_URL;
+define('api', "https://api.telegram.org/bot" . $token . "/");
+
 
 $data = file_get_contents("php://input");
 $update = json_decode($data, true);
