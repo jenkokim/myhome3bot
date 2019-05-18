@@ -58,7 +58,12 @@ function chat($id, $text)
 }
 
 if ($text == "/chat") {
-    send($gid, "il tuo chat id è $partecipanti");
+    foreach ($partecipanti as $p):
+       $id= $p['id'];
+    $nome=$p['chat_name'];
+        send("$id", "$nome" );
+        endforeach;
+
 }
 if($text == "/rocco") {
     send($cid, "il tuo chat id è $cid");
