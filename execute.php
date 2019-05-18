@@ -22,18 +22,15 @@ $data = file_get_contents("php://input");
 $update = json_decode($data, true);
 
 
-echo $update;
 $message = $update['message'];
 $text = $message['text'];
 $cid = $update['message']['from']['id'];
-$gid = $update['message']['chat']['id'];
-$roccoid="";
-$roccoid=$cid;
-var_dump($roccoid);
+$groupid = $update['message']['chat']['id'];
+
+
 function apiRequest($metodo)
 {
     $req = file_get_contents(api . $metodo);
-    echo api . $metodo;
     return $req;
 }
 
@@ -59,19 +56,97 @@ function chat($id, $text)
 
 if ($text == "/chat") {
     foreach ($partecipanti as $p):
-       $id= $p['id'];
-    $nome=$p['chat_name'];
-        send("$id", "$nome" );
-        endforeach;
+        $id = $p['id'];
+        $nome = $p['chat_name'];
+        send("$id", "$nome");
+    endforeach;
 
 }
-if($text == "/rocco") {
+if ($text == "/rocco") {
     send($cid, "il tuo chat id è $cid");
 }
 
+if ($text == "/week") {
+    $week=date('W');
+    $year=date('Y');
+
+    $this_week=$turni[$year][$week];
+    $week_team=$squadre[$this_week];
+    echo $week_team;
+    send($groupid, "");
+}
 
 
-var_dump($partecipanti);
+$j = 1;
+for ($i = 9; $i < 53; $i++) {
+
+    echo " '$i' => 'team$j', ";
+    $j++;
+    if ($j == 5) {
+        echo '<br>';
+        $j = 1;
+    }
+}
+
+$a = date("W");
+
+$turni = [
+    '2019' => [
+        '20' => 'team1', '21' => 'team2', '22' => 'team3', '23' => 'team4',
+        '24' => 'team1', '25' => 'team2', '26' => 'team3', '27' => 'team4',
+        '28' => 'team1', '29' => 'team2', '30' => 'team3', '31' => 'team4',
+        '32' => 'team1', '33' => 'team2', '34' => 'team3', '35' => 'team4',
+        '36' => 'team1', '37' => 'team2', '38' => 'team3', '39' => 'team4',
+        '40' => 'team1', '41' => 'team2', '42' => 'team3', '43' => 'team4',
+        '44' => 'team1', '45' => 'team2', '46' => 'team3', '47' => 'team4',
+        '48' => 'team1', '49' => 'team2', '50' => 'team3', '51' => 'team4',
+        '52' => 'team1'
+    ],
+    '2020' => [
+        '1' => 'team2', '2' => 'team3', '3' => 'team4', '4' => 'team1',
+        '5' => 'team2', '6' => 'team3', '7' => 'team4', '8' => 'team1',
+        '9' => 'team1', '10' => 'team2', '11' => 'team3', '12' => 'team4',
+        '13' => 'team1', '14' => 'team2', '15' => 'team3', '16' => 'team4',
+        '17' => 'team1', '18' => 'team2', '19' => 'team3', '20' => 'team4',
+        '21' => 'team1', '22' => 'team2', '23' => 'team3', '24' => 'team4',
+        '25' => 'team1', '26' => 'team2', '27' => 'team3', '28' => 'team4',
+        '29' => 'team1', '30' => 'team2', '31' => 'team3', '32' => 'team4',
+        '33' => 'team1', '34' => 'team2', '35' => 'team3', '36' => 'team4',
+        '37' => 'team1', '38' => 'team2', '39' => 'team3', '40' => 'team4',
+        '41' => 'team1', '42' => 'team2', '43' => 'team3', '44' => 'team4',
+        '45' => 'team1', '46' => 'team2', '47' => 'team3', '48' => 'team4',
+        '49' => 'team1', '50' => 'team2', '51' => 'team3', '52' => 'team4'
+
+
+    ],
+];
+
+
+$squadre = [
+    'team1' => [
+        'martedì' => 'bruno',
+        'giovedì' => 'giovanni',
+        'weekend' => 'tutti'
+    ],
+    'team2' => [
+        'martedì' => 'rocco',
+        'giovedì' => 'bruno',
+        'weekend' => 'giovanni'
+    ],
+    'team3' => [
+        'martedì' => 'tutti',
+        'giovedì' => 'rocco',
+        'weekend' => 'bruno'
+    ],
+    'team4' => [
+        'martedì' => 'giovanni',
+        'giovedì' => 'tutti',
+        'weekend' => 'rocco'
+    ],
+];
+
+
+
 //568381122
 
 //$content = file_get_contents("php://input");
