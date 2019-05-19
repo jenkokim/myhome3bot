@@ -58,6 +58,7 @@ if ($text == "/week") {
     $year = date('Y');
     $day = date('l');
     $today = getDataOdierna();
+
     $day = getDayIta($day);
     $this_week = getTurni($year, $week);
     $week_team = getTeam($this_week);
@@ -70,6 +71,26 @@ if ($text == "/week") {
 
     send($cid, $mex);
 }
+
+if ($text == "/week") {
+    $week = date('W');
+    $year = date('Y');
+    $day = date('l');
+    $today = getDataOdierna();
+
+    $day = getDayIta($day);
+    $this_week = getTurni($year, $week);
+    $week_team = getTeam($this_week);
+    $tag1 = getTagPartecipanti($week_team[1]);
+    $tag2 = getTagPartecipanti($week_team[2]);
+    $tag3 = getTagPartecipanti($week_team[3]);
+
+    $mex = $today . "%0AQuesta settimana:%0A%0AMartedì (Bagno):%0A" . $week_team[1] . " " .$tag1. "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 ."%0A%0AWeekend (Casa):%0A". $week_team[3] . " " . $tag3;
+
+
+    send($groupid, $mex);
+}
+
 $week = date('W');
 $year = date('Y');
 $day = date('l');
