@@ -3,20 +3,7 @@
 $token = "668920983:AAH5OAvntJoUGWEDjE9CKQ9P4nQdY5MybxI";
 define('api', "https://api.telegram.org/bot" . $token . "/");
 
-$partecipanti = [
-    'giovanni' => [
-        'id' => '354008242',
-        'chat_name' => '@jenko_11'
-    ],
-    'rocco' => [
-        'id' => '126810558',
-        'chat_name' => '@rolud'
-    ],
-    'bruno' => [
-        'id' => '',
-        'chat_name' => ''
-    ],
-];
+
 
 $data = file_get_contents("php://input");
 $update = json_decode($data, true);
@@ -54,253 +41,176 @@ function chat($id, $text)
     return apiRequest("getChat?chat_id=$id");
 }
 
-if ($text == "/chat") {
-    foreach ($partecipanti as $p):
-        $id = $p['id'];
-        $nome = $p['chat_name'];
-        send("$id", "$nome");
-    endforeach;
-
-}
+//if ($text == "/chat") {
+//    foreach ($partecipanti as $p):
+//        $id = $p['id'];
+//        $nome = $p['chat_name'];
+//        send("$id", "$nome");
+//    endforeach;
+//
+//}
 if ($text == "/rocco") {
     send($cid, "il tuo chat id è $cid");
 }
 
 if ($text == "/week") {
-    $week=date('W');
-    $year=date('Y');
+    $week = date('W');
+    $year = date('Y');
+    $day = date('l');
+    $today= date('d m Y');
+    $day = getDayIta($day);
+    $this_week = getTurni($year, $week);
+    $week_team = getTeam($this_week);
+    $tag1=getTagPartecipanti($week_team[1]);
+    $tag2=getTagPartecipanti($week_team[2]);
+    $tag3=getTagPartecipanti($week_team[3]);
 
-    $this_week=$turni[$year][$week];
-    $week_team=$squadre[$this_week];
-    echo $week_team;
-    send('-260493788', $week_team);
+    $mex= $today."<br>Questa settimana i turni sono:<br>Martedì a " .$week_team[1]. ($tag1)." tocca il Bagno <br>Giovedì a ". $week_team[2] .($tag2). " tocca il Bagno e la Cucina<br>Nel Weekend a ". $week_team[3]. ($tag3)." tocca Tutta la Casa ";
+
+
+
+    send('-260493788', $mex);
+}
+
+//  $week = date('W');
+//    $year = date('Y');
+//    $day = date('l');
+//    $today= date('d m Y');
+//    $day = getDayIta($day);
+//    $this_week = getTurni($year, $week);
+//    $week_team = getTeam($this_week);
+//    $tag1=getTagPartecipanti($week_team[1]);
+//    $tag2=getTagPartecipanti($week_team[2]);
+//    $tag3=getTagPartecipanti($week_team[3]);
+//
+//    $mex= $today."<br>Questa settimana i turni sono:<br>Martedì a " .$week_team[1]. ($tag1)." tocca il Bagno <br>Giovedì a ". $week_team[2] .($tag2). " tocca il Bagno e la Cucina<br>Nel Weekend a ". $week_team[3]. ($tag3)." tocca Tutta la Casa ";
+//
+//var_dump($mex);
+
+
+
+
+
+function getTurni($year, $week)
+{
+
+    $turni = [
+        '2019' => [
+            '20' => 'team1', '21' => 'team2', '22' => 'team3', '23' => 'team4',
+            '24' => 'team1', '25' => 'team2', '26' => 'team3', '27' => 'team4',
+            '28' => 'team1', '29' => 'team2', '30' => 'team3', '31' => 'team4',
+            '32' => 'team1', '33' => 'team2', '34' => 'team3', '35' => 'team4',
+            '36' => 'team1', '37' => 'team2', '38' => 'team3', '39' => 'team4',
+            '40' => 'team1', '41' => 'team2', '42' => 'team3', '43' => 'team4',
+            '44' => 'team1', '45' => 'team2', '46' => 'team3', '47' => 'team4',
+            '48' => 'team1', '49' => 'team2', '50' => 'team3', '51' => 'team4',
+            '52' => 'team1'
+        ],
+        '2020' => [
+            '1' => 'team2', '2' => 'team3', '3' => 'team4', '4' => 'team1',
+            '5' => 'team2', '6' => 'team3', '7' => 'team4', '8' => 'team1',
+            '9' => 'team2', '10' => 'team3', '11' => 'team4', '12' => 'team1',
+            '13' => 'team2', '14' => 'team3', '15' => 'team4', '16' => 'team1',
+            '17' => 'team2', '18' => 'team3', '19' => 'team4', '20' => 'team1',
+            '21' => 'team2', '22' => 'team3', '23' => 'team4', '24' => 'team1',
+            '25' => 'team2', '26' => 'team3', '27' => 'team4', '28' => 'team1',
+            '29' => 'team2', '30' => 'team3', '31' => 'team4', '32' => 'team1',
+            '33' => 'team2', '34' => 'team3', '35' => 'team4', '36' => 'team1',
+            '37' => 'team2', '38' => 'team3', '39' => 'team4', '40' => 'team1',
+            '41' => 'team2', '42' => 'team3', '43' => 'team4', '44' => 'team1',
+            '45' => 'team2', '46' => 'team3', '47' => 'team4', '48' => 'team1',
+            '49' => 'team2', '50' => 'team3', '51' => 'team4', '52' => 'team1'
+        ],
+    ];
+    return $turni[$year][$week];
 }
 
 
-$j = 1;
-for ($i = 9; $i < 53; $i++) {
-
-    echo " '$i' => 'team$j', ";
-    $j++;
-    if ($j == 5) {
-        echo '<br>';
-        $j = 1;
-    }
+function getDay($d){
+    $day = [
+        'Tuesday' => '1',
+        'Thursday'=> '2',
+        'Saturday'=> '3',
+        'Sunday' => '3'
+    ];
+    return $day[$d];
 }
 
-$a = date("W");
+function getTeam($team)
+{
 
-$turni = [
-    '2019' => [
-        '20' => 'team1', '21' => 'team2', '22' => 'team3', '23' => 'team4',
-        '24' => 'team1', '25' => 'team2', '26' => 'team3', '27' => 'team4',
-        '28' => 'team1', '29' => 'team2', '30' => 'team3', '31' => 'team4',
-        '32' => 'team1', '33' => 'team2', '34' => 'team3', '35' => 'team4',
-        '36' => 'team1', '37' => 'team2', '38' => 'team3', '39' => 'team4',
-        '40' => 'team1', '41' => 'team2', '42' => 'team3', '43' => 'team4',
-        '44' => 'team1', '45' => 'team2', '46' => 'team3', '47' => 'team4',
-        '48' => 'team1', '49' => 'team2', '50' => 'team3', '51' => 'team4',
-        '52' => 'team1'
-    ],
-    '2020' => [
-        '1' => 'team2', '2' => 'team3', '3' => 'team4', '4' => 'team1',
-        '5' => 'team2', '6' => 'team3', '7' => 'team4', '8' => 'team1',
-        '9' => 'team1', '10' => 'team2', '11' => 'team3', '12' => 'team4',
-        '13' => 'team1', '14' => 'team2', '15' => 'team3', '16' => 'team4',
-        '17' => 'team1', '18' => 'team2', '19' => 'team3', '20' => 'team4',
-        '21' => 'team1', '22' => 'team2', '23' => 'team3', '24' => 'team4',
-        '25' => 'team1', '26' => 'team2', '27' => 'team3', '28' => 'team4',
-        '29' => 'team1', '30' => 'team2', '31' => 'team3', '32' => 'team4',
-        '33' => 'team1', '34' => 'team2', '35' => 'team3', '36' => 'team4',
-        '37' => 'team1', '38' => 'team2', '39' => 'team3', '40' => 'team4',
-        '41' => 'team1', '42' => 'team2', '43' => 'team3', '44' => 'team4',
-        '45' => 'team1', '46' => 'team2', '47' => 'team3', '48' => 'team4',
-        '49' => 'team1', '50' => 'team2', '51' => 'team3', '52' => 'team4'
+    $squadre = [
+        'team1' => [
+            '1' => 'Bruno',
+            '2' => 'Giovanni',
+            '3' => 'Tutti'
+        ],
+        'team2' => [
+            '1' => 'Rocco',
+            '2' => 'Bruno',
+            '3' => 'Giovanni'
+        ],
+        'team3' => [
+            '1' => 'Tutti',
+            '2' => 'Rocco',
+            '3' => 'Bruno'
+        ],
+        'team4' => [
+            '1' => 'Giovanni',
+            '2' => 'Tutti',
+            '3' => 'Rocco'
+        ],
+    ];
+    return $squadre[$team];
+}
 
+function getPulizie($day){
 
-    ],
-];
-
-
-$squadre = [
-    'team1' => [
-        'martedì' => 'bruno',
-        'giovedì' => 'giovanni',
-        'weekend' => 'tutti'
-    ],
-    'team2' => [
-        'martedì' => 'rocco',
-        'giovedì' => 'bruno',
-        'weekend' => 'giovanni'
-    ],
-    'team3' => [
-        'martedì' => 'tutti',
-        'giovedì' => 'rocco',
-        'weekend' => 'bruno'
-    ],
-    'team4' => [
-        'martedì' => 'giovanni',
-        'giovedì' => 'tutti',
-        'weekend' => 'rocco'
-    ],
-];
+    $tipo_pulizia = [
+        '1' => 'Bagno',
+        '2' => 'Bagno e Cucina',
+        '3' => 'Tutta la Casa'
+    ];
+    return $tipo_pulizia[$day];
+}
 
 
+function getDayIta($day){
 
-//568381122
+    $traslate=[
+        'Monday' => 'Lunedì',
+        'Tuesday' => 'Martedì',
+        'Wednesday' => 'Mercoledì',
+        'Thursday'=> 'Giovedì',
+        'Friday' => 'Venerdì',
+        'Saturday'=> 'Sabato',
+        'Sunday' => 'Domenica'
+    ];
+    return $traslate[$day];
+}
 
-//$content = file_get_contents("php://input");
-//$update = json_decode($content, true);
-//
-//$content1 = $content;
-//var_dump($content1);
-//$update1 = $update;
-//var_dump($update1);
-//
-//function apiRequestWebhook($method, $parameters){
-//    if (!is_string($method)) {
-//        error_log("Method name must be a string\n");
-//        return false;
-//    }
-//
-//    if (!$parameters) {
-//        $parameters = array();
-//    } else if (!is_array($parameters)) {
-//        error_log("Parameters must be an array\n");
-//        return false;
-//    }
-//    $parameters["method"] = $method;
-//
-//
-//    header("Content-Type: application/json");
-//    echo json_encode($parameters);
-//    return true;
-//}
-//
-//
-//
-//function apiRequest($method, $parameters)
-//{
-//    if (!is_string($method)) {
-//        error_log("Method name must be a string\n");
-//        return false;
-//    }
-//
-//    if (!$parameters) {
-//        $parameters = array();
-//    } else if (!is_array($parameters)) {
-//        error_log("Parameters must be an array\n");
-//        return false;
-//    }
-//
-//    foreach ($parameters as $key => &$val) {
-//        // encoding to JSON array parameters, for example reply_markup
-//        if (!is_numeric($val) && !is_string($val)) {
-//            $val = json_encode($val);
-//        }
-//    }
-//    $url = API_URL . $method . '?' . http_build_query($parameters);
-//
-//    $handle = curl_init($url);
-//    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-//    curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
-//    curl_setopt($handle, CURLOPT_TIMEOUT, 60);
-//
-//    return exec_curl_request($handle);
-//}
-//
-//
-//function exec_curl_request($handle)
-//{
-//    $response = curl_exec($handle);
-//
-//    if ($response === false) {
-//        $errno = curl_errno($handle);
-//        $error = curl_error($handle);
-//        error_log("Curl returned error $errno: $error\n");
-//        curl_close($handle);
-//        return false;
-//    }
-//
-//    $http_code = intval(curl_getinfo($handle, CURLINFO_HTTP_CODE));
-//    curl_close($handle);
-//
-//    if ($http_code >= 500) {
-//        // do not wat to DDOS server if something goes wrong
-//        sleep(10);
-//        return false;
-//    } else if ($http_code != 200) {
-//        $response = json_decode($response, true);
-//        error_log("Request has failed with error {$response['error_code']}: {$response['description']}\n");
-//        if ($http_code == 401) {
-//            throw new Exception('Invalid access token provided');
-//        }
-//        return false;
-//    } else {
-//        $response = json_decode($response, true);
-//        if (isset($response['description'])) {
-//            error_log("Request was successful: {$response['description']}\n");
-//        }
-//        $response = $response['result'];
-//    }
-//
-//    return $response;
-//}
-//
-//function apiRequestJson($method, $parameters)
-//{
-//    if (!is_string($method)) {
-//        error_log("Method name must be a string\n");
-//        return false;
-//    }
-//
-//    if (!$parameters) {
-//        $parameters = array();
-//    } else if (!is_array($parameters)) {
-//        error_log("Parameters must be an array\n");
-//        return false;
-//    }
-//
-//    $parameters["method"] = $method;
-//
-//    $handle = curl_init(API_URL);
-//    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-//    curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
-//    curl_setopt($handle, CURLOPT_TIMEOUT, 60);
-//    curl_setopt($handle, CURLOPT_POST, true);
-//    curl_setopt($handle, CURLOPT_POSTFIELDS, json_encode($parameters));
-//    curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
-//
-//    return exec_curl_request($handle);
-//}
-//
-//function processMessage($message){
-//    // process incoming message
-//    $message_id = $message['message_id'];
-//    $chat_id = $message['chat']['id'];
-//    if (isset($message['text'])) :
-//        // incoming text message
-//        $text = $message['text'];
-//
-//        if (strpos($text, "/start") === 0) :
-//
-//            apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Hello', 'reply_markup' => array(
-//                'keyboard' => array(array('Hello', 'Hi')),
-//                'one_time_keyboard' => true,
-//                'resize_keyboard' => true)));
-//
-//        elseif ($text === "Hello" || $text === "Hi") :
-//            apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => '\'Nto culu'));
-//        elseif (strpos($text, "/stop") === 0) :
-//            // stop now
-//        else :
-//            apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => 'Cool'));
-//        endif;
-//    else:
-//        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
-//    endif;
-//}
-//
+function getTagPartecipanti($nome){
+
+    $partecipanti = [
+        'Giovanni' => [
+            'id' => '354008242',
+            'chat_name' => '@jenko_11'
+        ],
+        'Rocco' => [
+            'id' => '126810558',
+            'chat_name' => '@rolud'
+        ],
+        'Bruno' => [
+            'id' => '',
+            'chat_name' => ''
+        ],
+        'Tutti' => [
+            'id' => '',
+            'chat_name' => '@jenko_11 , @rolud , @Semone96'
+        ],
+    ];
+    return $partecipanti[$nome]['chat_name'];
+}
 //
 //
 //
@@ -326,9 +236,3 @@ $squadre = [
 //$text = trim($text);
 //$text = strtolower($text);
 
-//header("Content-Type: application/json");
-//$parameters = array('chat_id' => $chatId, "text" => $text);
-//$parameters["method"] = "sendMessage";
-//echo json_encode($parameters);
-//print_r($parameters);
-//
