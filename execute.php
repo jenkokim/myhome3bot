@@ -15,7 +15,7 @@ $groupid = $update['message']['chat']['id'];
 
 
 $text= explode('@',$text);
-;
+
 function apiRequest($metodo)
 {
     $req = file_get_contents(api . $metodo);
@@ -49,7 +49,7 @@ function chat($id, $text)
 //saveInJsonFile($prova, "inviato.json");
 
 
-if ($text == "/week") {
+if ($text[0] == "/week") {
     $week = date('W');
     $year = date('Y');
     $day = date('l');
