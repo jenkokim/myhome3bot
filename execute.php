@@ -1,9 +1,8 @@
 <?php
+include 'utlis.php';
 
 $token = "668920983:AAH5OAvntJoUGWEDjE9CKQ9P4nQdY5MybxI";
 define('api', "https://api.telegram.org/bot" . $token . "/");
-
-
 
 
 $data = file_get_contents("php://input");
@@ -58,38 +57,36 @@ if ($text == "/week") {
     $week = date('W');
     $year = date('Y');
     $day = date('l');
-    $today= date('d m Y');
+    $today = getDataOdierna();
     $day = getDayIta($day);
     $this_week = getTurni($year, $week);
     $week_team = getTeam($this_week);
-    $tag1=getTagPartecipanti($week_team[1]);
-    $tag2=getTagPartecipanti($week_team[2]);
-    $tag3=getTagPartecipanti($week_team[3]);
+    $tag1 = getTagPartecipanti($week_team[1]);
+    $tag2 = getTagPartecipanti($week_team[2]);
+    $tag3 = getTagPartecipanti($week_team[3]);
 
-    $mex= $today."%0AQuesta settimana i turni sono:%0AMartedì ->" .$week_team[1]." ".($tag1)." -> Bagno %0AGiovedì -> ". $week_team[2] ." ".($tag2). " -> Bagno e Cucina%0AWeekend -> ". $week_team[3]." ". ($tag3)." -> Tutta la Casa ";
-
+    $mex = $today . "%0AQuesta settimana:%0A%0AMartedì:%0A" . $week_team[1] . " " .$tag1. "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 ."%0A%0AWeekend (Casa)". $week_team[3] . " " . $tag3;
 
 
     send('354008242', $mex);
 }
+$week = date('W');
+$year = date('Y');
+$day = date('l');
+$today = getDataOdierna();
+$day = getDayIta($day);
+$this_week = getTurni($year, $week);
+$week_team = getTeam($this_week);
+$tag1 = getTagPartecipanti($week_team[1]);
+$tag2 = getTagPartecipanti($week_team[2]);
+$tag3 = getTagPartecipanti($week_team[3]);
 
-//  $week = date('W');
-//    $year = date('Y');
-//    $day = date('l');
-//    $today= date('d m Y');
-//    $day = getDayIta($day);
-//    $this_week = getTurni($year, $week);
-//    $week_team = getTeam($this_week);
-//    $tag1=getTagPartecipanti($week_team[1]);
-//    $tag2=getTagPartecipanti($week_team[2]);
-//    $tag3=getTagPartecipanti($week_team[3]);
-//
-//    $mex= $today."<br>Questa settimana i turni sono:<br>Martedì a " .$week_team[1]. ($tag1)." tocca il Bagno <br>Giovedì a ". $week_team[2] .($tag2). " tocca il Bagno e la Cucina<br>Nel Weekend a ". $week_team[3]. ($tag3)." tocca Tutta la Casa ";
-//
-//var_dump($mex);
+$mex = $today . "%0AQuesta settimana:%0A%0AMartedì:%0A" . $week_team[1] . " " .$tag1. "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 ."%0A%0AWeekend (Casa)". $week_team[3] . " " . $tag3;
 
 
 
+
+echo $mex;
 
 
 function getTurni($year, $week)
@@ -127,11 +124,12 @@ function getTurni($year, $week)
 }
 
 
-function getDay($d){
+function getDay($d)
+{
     $day = [
         'Tuesday' => '1',
-        'Thursday'=> '2',
-        'Saturday'=> '3',
+        'Thursday' => '2',
+        'Saturday' => '3',
         'Sunday' => '3'
     ];
     return $day[$d];
@@ -165,7 +163,8 @@ function getTeam($team)
     return $squadre[$team];
 }
 
-function getPulizie($day){
+function getPulizie($day)
+{
 
     $tipo_pulizia = [
         '1' => 'Bagno',
@@ -176,21 +175,23 @@ function getPulizie($day){
 }
 
 
-function getDayIta($day){
+function getDayIta($day)
+{
 
-    $traslate=[
+    $traslate = [
         'Monday' => 'Lunedì',
         'Tuesday' => 'Martedì',
         'Wednesday' => 'Mercoledì',
-        'Thursday'=> 'Giovedì',
+        'Thursday' => 'Giovedì',
         'Friday' => 'Venerdì',
-        'Saturday'=> 'Sabato',
+        'Saturday' => 'Sabato',
         'Sunday' => 'Domenica'
     ];
     return $traslate[$day];
 }
 
-function getTagPartecipanti($nome){
+function getTagPartecipanti($nome)
+{
 
     $partecipanti = [
         'Giovanni' => [
@@ -202,8 +203,8 @@ function getTagPartecipanti($nome){
             'chat_name' => '@rolud'
         ],
         'Bruno' => [
-            'id' => '',
-            'chat_name' => ''
+            'id' => '62339004',
+            'chat_name' => '@Semone96'
         ],
         'Tutti' => [
             'id' => '',
@@ -211,6 +212,26 @@ function getTagPartecipanti($nome){
         ],
     ];
     return $partecipanti[$nome]['chat_name'];
+}
+
+
+function getMesiIta($mese){
+
+    $traslate = [
+        'January' => 'Gennaio',
+        'February' => 'Febbraio',
+        'March' => 'Marzo',
+        'April' => 'Aprile',
+        'May' => 'Maggio',
+        'June' => 'Giugno',
+        'July' => 'Luglio',
+        'August' => 'Agosto',
+        'September' => 'Settembre',
+        'October' => 'Ottobre',
+        'November' => 'Novembre',
+        'December' => 'Dicembre'
+    ];
+    return $traslate[$mese];
 }
 //
 //
