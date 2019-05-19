@@ -69,7 +69,7 @@ if ($text == "/week") {
 
 
 
-    send('354008242', $mex);
+    send('354008242', "ciao");
 }
 
 //  $week = date('W');
