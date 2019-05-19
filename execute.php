@@ -4,10 +4,9 @@ include 'utlis.php';
 $token = "668920983:AAH5OAvntJoUGWEDjE9CKQ9P4nQdY5MybxI";
 define('api', "https://api.telegram.org/bot" . $token . "/");
 
-
 $data = file_get_contents("php://input");
 $update = json_decode($data, true);
-
+//saveInJsonFile($update, "ricevuto.json");
 
 $message = $update['message'];
 $text = $message['text'];
@@ -15,22 +14,19 @@ $cid = $update['message']['from']['id'];
 $groupid = $update['message']['chat']['id'];
 
 
+$text= explode('@',$text);
+;
 function apiRequest($metodo)
 {
     $req = file_get_contents(api . $metodo);
     return $req;
 }
 
-function send($id, $text)
-{
-    if (strpos($text, '\n')) {
-        $text = urlencode($text);
-    }
-    return apiRequest("sendMessage?text=$text&parse_mode=HTML&chat_id=$id");
-}
 
-if ($text == "/start") {
-    send($cid, "Benvenuto sul bot, il tuo id è $cid");
+
+
+if ($text[0] == "/start") {
+    $prova=send($cid, "Benvenuto sul bot, il tuo id è $cid");
 }
 
 function chat($id, $text)
@@ -49,28 +45,9 @@ function chat($id, $text)
 //    endforeach;
 //
 //}
-if ($text == "/rocco") {
-    send($cid, "il tuo chat id è $cid");
-}
 
-if ($text == "/week") {
-    $week = date('W');
-    $year = date('Y');
-    $day = date('l');
-    $today = getDataOdierna();
+//saveInJsonFile($prova, "inviato.json");
 
-    $day = getDayIta($day);
-    $this_week = getTurni($year, $week);
-    $week_team = getTeam($this_week);
-    $tag1 = getTagPartecipanti($week_team[1]);
-    $tag2 = getTagPartecipanti($week_team[2]);
-    $tag3 = getTagPartecipanti($week_team[3]);
-
-    $mex = $today . "%0AQuesta settimana:%0A%0AMartedì (Bagno):%0A" . $week_team[1] . " " .$tag1. "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 ."%0A%0AWeekend (Casa):%0A". $week_team[3] . " " . $tag3;
-
-
-    send($cid, $mex);
-}
 
 if ($text == "/week") {
     $week = date('W');
@@ -91,183 +68,9 @@ if ($text == "/week") {
     send($groupid, $mex);
 }
 
-$week = date('W');
-$year = date('Y');
-$day = date('l');
-$today = getDataOdierna();
-$day = getDayIta($day);
-$this_week = getTurni($year, $week);
-$week_team = getTeam($this_week);
-$tag1 = getTagPartecipanti($week_team[1]);
-$tag2 = getTagPartecipanti($week_team[2]);
-$tag3 = getTagPartecipanti($week_team[3]);
-
-$mex = $today . "%0AQuesta settimana:%0A%0AMartedì (Bagno):%0A" . $week_team[1] . " " .$tag1. "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 ."%0A%0AWeekend (Casa):%0A". $week_team[3] . " " . $tag3;
 
 
 
-
-echo $mex;
-
-
-function getTurni($year, $week)
-{
-
-    $turni = [
-        '2019' => [
-            '20' => 'team1', '21' => 'team2', '22' => 'team3', '23' => 'team4',
-            '24' => 'team1', '25' => 'team2', '26' => 'team3', '27' => 'team4',
-            '28' => 'team1', '29' => 'team2', '30' => 'team3', '31' => 'team4',
-            '32' => 'team1', '33' => 'team2', '34' => 'team3', '35' => 'team4',
-            '36' => 'team1', '37' => 'team2', '38' => 'team3', '39' => 'team4',
-            '40' => 'team1', '41' => 'team2', '42' => 'team3', '43' => 'team4',
-            '44' => 'team1', '45' => 'team2', '46' => 'team3', '47' => 'team4',
-            '48' => 'team1', '49' => 'team2', '50' => 'team3', '51' => 'team4',
-            '52' => 'team1'
-        ],
-        '2020' => [
-            '1' => 'team2', '2' => 'team3', '3' => 'team4', '4' => 'team1',
-            '5' => 'team2', '6' => 'team3', '7' => 'team4', '8' => 'team1',
-            '9' => 'team2', '10' => 'team3', '11' => 'team4', '12' => 'team1',
-            '13' => 'team2', '14' => 'team3', '15' => 'team4', '16' => 'team1',
-            '17' => 'team2', '18' => 'team3', '19' => 'team4', '20' => 'team1',
-            '21' => 'team2', '22' => 'team3', '23' => 'team4', '24' => 'team1',
-            '25' => 'team2', '26' => 'team3', '27' => 'team4', '28' => 'team1',
-            '29' => 'team2', '30' => 'team3', '31' => 'team4', '32' => 'team1',
-            '33' => 'team2', '34' => 'team3', '35' => 'team4', '36' => 'team1',
-            '37' => 'team2', '38' => 'team3', '39' => 'team4', '40' => 'team1',
-            '41' => 'team2', '42' => 'team3', '43' => 'team4', '44' => 'team1',
-            '45' => 'team2', '46' => 'team3', '47' => 'team4', '48' => 'team1',
-            '49' => 'team2', '50' => 'team3', '51' => 'team4', '52' => 'team1'
-        ],
-    ];
-    return $turni[$year][$week];
-}
-
-
-function getDay($d)
-{
-    $day = [
-        'Tuesday' => '1',
-        'Thursday' => '2',
-        'Saturday' => '3',
-        'Sunday' => '3'
-    ];
-    return $day[$d];
-}
-
-function getTeam($team)
-{
-
-    $squadre = [
-        'team1' => [
-            '1' => 'Bruno',
-            '2' => 'Giovanni',
-            '3' => 'Tutti'
-        ],
-        'team2' => [
-            '1' => 'Rocco',
-            '2' => 'Bruno',
-            '3' => 'Giovanni'
-        ],
-        'team3' => [
-            '1' => 'Tutti',
-            '2' => 'Rocco',
-            '3' => 'Bruno'
-        ],
-        'team4' => [
-            '1' => 'Giovanni',
-            '2' => 'Tutti',
-            '3' => 'Rocco'
-        ],
-    ];
-    return $squadre[$team];
-}
-
-function getPulizie($day)
-{
-
-    $tipo_pulizia = [
-        '1' => 'Bagno',
-        '2' => 'Bagno e Cucina',
-        '3' => 'Tutta la Casa'
-    ];
-    return $tipo_pulizia[$day];
-}
-
-
-function getDayIta($day)
-{
-
-    $traslate = [
-        'Monday' => 'Lunedì',
-        'Tuesday' => 'Martedì',
-        'Wednesday' => 'Mercoledì',
-        'Thursday' => 'Giovedì',
-        'Friday' => 'Venerdì',
-        'Saturday' => 'Sabato',
-        'Sunday' => 'Domenica'
-    ];
-    return $traslate[$day];
-}
-
-function getTagPartecipanti($nome)
-{
-
-    $partecipanti = [
-        'Giovanni' => [
-            'id' => '354008242',
-            'chat_name' => '@jenko_11'
-        ],
-        'Rocco' => [
-            'id' => '126810558',
-            'chat_name' => '@rolud'
-        ],
-        'Bruno' => [
-            'id' => '62339004',
-            'chat_name' => '@Semone96'
-        ],
-        'Tutti' => [
-            'id' => '',
-            'chat_name' => '@jenko_11 , @rolud , @Semone96'
-        ],
-    ];
-    return $partecipanti[$nome]['chat_name'];
-}
-
-
-function getMesiIta($mese){
-
-    $traslate = [
-        'January' => 'Gennaio',
-        'February' => 'Febbraio',
-        'March' => 'Marzo',
-        'April' => 'Aprile',
-        'May' => 'Maggio',
-        'June' => 'Giugno',
-        'July' => 'Luglio',
-        'August' => 'Agosto',
-        'September' => 'Settembre',
-        'October' => 'Ottobre',
-        'November' => 'Novembre',
-        'December' => 'Dicembre'
-    ];
-    return $traslate[$mese];
-}
-//
-//
-//
-//if (!$update) {
-//    // receive wrong update, must not happen
-//    exit;
-//}
-//
-//if (isset($update["message"])) {
-//    processMessage($update["message"]);
-//}
-//
-//
-//
 
 
 //$firstname = isset($message['chat']['first_name']) ? $message['chat']['first_name'] : "";
@@ -278,4 +81,78 @@ function getMesiIta($mese){
 //
 //$text = trim($text);
 //$text = strtolower($text);
+
+
+//è necessario aggiungere bot prima del nostro token
+//You must add bot before our token
+//$botToken = "bot" . "589789293:AAGfEsknWMFSSayCUWqSZIZePRx9mGm8NXY";
+//
+////Recuperiamo l'input che riceveremo dal bot
+////We retrieve the input we receive from bot
+//$TelegramRawInput = file_get_contents("php://input");
+//// php://input restituisce i dati raw (testo), andremo quindi a formattare il tutto in un array, i dati che riceveremo saranno in formato Json quindi un json_decode farà al caso nostro.
+//// php // input returns the raw data (text), then we will format everything in an array, the data we receive will be in Json format so a json_decode will be for us.
+//$update = json_decode($TelegramRawInput, TRUE);
+//
+////Assicuriamoci di aver ricevuto un update, altrimenti interrompiamo l'esecuzione
+////Make sure you have received an update, otherwise we interrupt execute
+//if (!$update) {
+//    exit;
+//}
+//
+////Recuperiamo l'oggetto message dal json
+////We recover the message object from json
+//$MessageObj = $update['message'];
+////Recuperiamo il chatId, che utilizzeremo per rispondere all'utente che ci ha appena invocato
+////We recover the chatId table which we will use to respond to the user who has just invoked
+//$chatId = $MessageObj['chat']['id'];
+//
+////Salvo il json ricevuto per analizzarlo in seguito
+////We save the json received to parse it later
+//saveInJsonFile($update, "ricevuto.json");
+//
+////Rispondiamo HelloWorld
+////We answer HelloWorld
+//$out = sendMsg($botToken, $chatId, "Hello World!");
+//
+////Salvo il json ricevuto per analizzarlo in seguito
+////We save the json received to parse it later
+//saveInJsonFile($out, "inviato.json");
+//
+//
+///**
+// *
+// * FUNCTION AREA
+// *
+// */
+//
+////Funzione per far inviare un messaggio da parte del bot
+////Function to send a message from the bot
+//function sendMsg($tkn, $cId, $msgTxt)
+//{
+//    /*
+//        Creiamo la URL per richiamare la API Telegram apposita, nel nostro caso sarà la sendMessage.
+//        Questa API richiede due parametri obbligatori, chatId e Testo del messaggio
+//        NB: La chiamata alla API sarà in GET, quindi è consigliato (fortemente consigliato) di inviare il testo all'interno di un urlencode().
+//
+//
+//        Create the URL to invoke the appropriate API in this case will be the Telegram sendMessage.
+//        This API requires two required parameters, chatId and message text
+//        NOTE: the call to the API will GET, so it is recommended (strongly recommended) to send the text within a urlencode ().
+//    */
+//    $TelegramUrlSendMessage = "https://api.telegram.org/" . $tkn . "/sendMessage?chat_id=" . $cId . "&text=" . urlencode($msgTxt);
+//
+//    //Come return della funzione restituiremo l'output di file_get_contents della URL appena creata.
+//    //As a return of the function we will return the output of file_get_contents of the URL just created.
+   // return file_get_contents($TelegramUrlSendMessage);
+//}
+//
+////Questa è la funzione che utilizzo per salvare il json nei file
+////This is the function i use to save the json in file
+//function saveInJsonFile($data, $filename)
+//{
+//    if (file_exists($filename))
+//        unlink($filename);
+//    file_put_contents($filename, json_encode($data, JSON_PRETTY_PRINT));
+//}
 
