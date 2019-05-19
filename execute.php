@@ -26,7 +26,7 @@ function send($id, $text)
     if (strpos($text, '\n')) {
         $text = urlencode($text);
     }
-    return apiRequest("sendMessage?text=$text&chat_id=$id");
+    return apiRequest("sendMessage?text=$text&parse_mode=HTML&chat_id=$id");
 }
 
 if ($text == "/start") {
@@ -65,7 +65,7 @@ if ($text == "/week") {
     $tag2=getTagPartecipanti($week_team[2]);
     $tag3=getTagPartecipanti($week_team[3]);
 
-    $mex= $today."\nQuesta settimana i turni sono";//:<br>Martedì a " .$week_team[1]. ($tag1)." tocca il Bagno <br>Giovedì a ". $week_team[2] .($tag2). " tocca il Bagno e la Cucina<br>Nel Weekend a ". $week_team[3]. ($tag3)." tocca Tutta la Casa ";
+    $mex= $today."<br/>Questa settimana i turni sono";//:<br>Martedì a " .$week_team[1]. ($tag1)." tocca il Bagno <br>Giovedì a ". $week_team[2] .($tag2). " tocca il Bagno e la Cucina<br>Nel Weekend a ". $week_team[3]. ($tag3)." tocca Tutta la Casa ";
 
 
 
