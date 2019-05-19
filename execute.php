@@ -65,11 +65,11 @@ if ($text == "/week") {
     $tag2=getTagPartecipanti($week_team[2]);
     $tag3=getTagPartecipanti($week_team[3]);
 
-    $mex= $today."<br>Questa settimana i turni sono:<br>Martedì a " .$week_team[1]. ($tag1)." tocca il Bagno <br>Giovedì a ". $week_team[2] .($tag2). " tocca il Bagno e la Cucina<br>Nel Weekend a ". $week_team[3]. ($tag3)." tocca Tutta la Casa ";
+    $mex= $today;//."<br>Questa settimana i turni sono:<br>Martedì a " .$week_team[1]. ($tag1)." tocca il Bagno <br>Giovedì a ". $week_team[2] .($tag2). " tocca il Bagno e la Cucina<br>Nel Weekend a ". $week_team[3]. ($tag3)." tocca Tutta la Casa ";
 
 
 
-    send('354008242', "ciao");
+    send('354008242', $today);
 }
 
 //  $week = date('W');
