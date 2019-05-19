@@ -66,7 +66,7 @@ if ($text == "/week") {
     $tag2=getTagPartecipanti($week_team[2]);
     $tag3=getTagPartecipanti($week_team[3]);
 
-    $mex= $today."%0AQuesta settimana i turni sono:%0AMartedì a " .$week_team[1]. ($tag1)." tocca il Bagno %0AGiovedì a ". $week_team[2] .($tag2). " tocca il Bagno e la Cucina%0ANel Weekend a ". $week_team[3]. ($tag3)." tocca Tutta la Casa ";
+    $mex= $today."%0AQuesta settimana i turni sono:%0AMartedì ->" .$week_team[1]." ".($tag1)." -> Bagno %0AGiovedì -> ". $week_team[2] ." ".($tag2). " -> Bagno e Cucina%0AWeekend -> ". $week_team[3]." ". ($tag3)." -> Tutta la Casa ";
 
 
 
