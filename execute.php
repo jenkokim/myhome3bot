@@ -68,7 +68,7 @@ if ($text == "/week") {
     $mex = $today . "%0AQuesta settimana:%0A%0AMartedì (Bagno):%0A" . $week_team[1] . " " .$tag1. "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 ."%0A%0AWeekend (Casa):%0A". $week_team[3] . " " . $tag3;
 
 
-    send('354008242', $mex);
+    send($cid, $mex);
 }
 $week = date('W');
 $year = date('Y');
