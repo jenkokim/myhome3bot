@@ -80,8 +80,8 @@ if (array_key_exists(date('l'), $day)): //confronto con il giorno attuale per in
 
     $pulitore = $settimana[$turno]; //prendo chi deve fare le pulizie
 
-    if ((date('G') == 12 || (date('G') == 14) || (date('G') == 18)):
-        if (date('i') == 45):
+    if ((date('G') == 12 || (date('G') == 14) || (date('G') == 18))):
+        if (date('i') == 46):
             if (date('s') == 00):
                 $today = getDataOdierna();
                 $section = getPulizie($turno);
@@ -90,6 +90,7 @@ if (array_key_exists(date('l'), $day)): //confronto con il giorno attuale per in
                 send($id,$text);
             endif;
         endif;
+
     endif;
 endif;
 //endwhile;
