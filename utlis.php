@@ -1,4 +1,9 @@
 <?php
+function apiRequest($metodo)
+{
+    $req = file_get_contents(api . $metodo);
+    return $req;
+}
 
 function send($id, $text)
 {
