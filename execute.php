@@ -3,7 +3,6 @@ include 'utlis.php';
 
 $token = "668920983:AAH5OAvntJoUGWEDjE9CKQ9P4nQdY5MybxI";
 define('api', "https://api.telegram.org/bot" . $token . "/");
-while (true):
 
 $data = file_get_contents("php://input");
 $update = json_decode($data, true);
@@ -13,6 +12,7 @@ $text = $message['text'];
 $cid = $update['message']['from']['id'];
 $groupid = $update['message']['chat']['id'];
 
+while (true):
 
 //if ($text[0] == "/start") {
 //    $prova = send($cid, "Benvenuto sul bot, il tuo id è $cid");
@@ -57,9 +57,9 @@ if ($text[0] == "/week") {
 
         if ((date('G') == 20 || (date('G') == 19) || (date('G') == 18))):
 
-            if (date('i') == 42):
+            if (date('i') == 43):
 
-                if (date('s') == 00) :
+                if (date('s') == 30) :
 
 
                     $today = getDataOdierna();
