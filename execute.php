@@ -14,7 +14,7 @@ $cid = $update['message']['from']['id'];
 $groupid = $update['message']['chat']['id'];
 
 
-$text= explode('@',$text);
+$text = explode('@', $text);
 
 function apiRequest($metodo)
 {
@@ -23,10 +23,8 @@ function apiRequest($metodo)
 }
 
 
-
-
 if ($text[0] == "/start") {
-    $prova=send($cid, "Benvenuto sul bot, il tuo id è $cid");
+    $prova = send($cid, "Benvenuto sul bot, il tuo id è $cid");
 }
 
 function chat($id, $text)
@@ -62,15 +60,45 @@ if ($text[0] == "/week") {
     $tag2 = getTagPartecipanti($week_team[2]);
     $tag3 = getTagPartecipanti($week_team[3]);
 
-    $mex = $today . "%0AQuesta settimana:%0A%0AMartedì (Bagno):%0A" . $week_team[1] . " " .$tag1. "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 ."%0A%0AWeekend (Casa):%0A". $week_team[3] . " " . $tag3;
+    $mex = $today . "%0AQuesta settimana:%0A%0AMartedì (Bagno):%0A" . $week_team[1] . " " . $tag1 . "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 . "%0A%0AWeekend (Casa):%0A" . $week_team[3] . " " . $tag3;
 
 
     send($groupid, $mex);
 }
+//while (true):
+$day = getDayNoParam(); //prendo l'array dei giorni per confrontarlo con il giorno attuale
+if (array_key_exists(date('l'), $day)): //confronto con il giorno attuale per inviare la notifica se risulta
+    $year = date('Y'); //prendo l'anno
 
+    $week = date('W');//prendo la settimana
 
+    $team = getTurni($year, $week); //prendo i turni di quella settimana
 
+    $settimana = getTeam($team); //prendo il team di quella settimana
 
+    $turno = getDay(date('l'));  //prendo il numero associato al giorno
+
+    $pulitore = $settimana[$turno]; //prendo chi deve fare le pulizie
+
+    if ((date('G') == 12 || (date('G') == 14) || (date('G') == 18)):
+        if (date('i') == 45):
+            if (date('s') == 00):
+                $today = getDataOdierna();
+                $section = getPulizie($turno);
+                $text = $today . "%0AEhi " . $pulitore['chat_name'] . " oggi devi lavare: " . $section;
+                $id=$pulitore['id'];
+                send($id,$text);
+            endif;
+        endif;
+    endif;
+endif;
+//endwhile;
+//foreach (getDay(date('l')) as $item) :
+//  var_dump( getDay(date('l')));
+//$item==date('l');
+//endforeach;
+
+//echo $day;
 
 
 //$firstname = isset($message['chat']['first_name']) ? $message['chat']['first_name'] : "";
@@ -144,7 +172,7 @@ if ($text[0] == "/week") {
 //
 //    //Come return della funzione restituiremo l'output di file_get_contents della URL appena creata.
 //    //As a return of the function we will return the output of file_get_contents of the URL just created.
-   // return file_get_contents($TelegramUrlSendMessage);
+// return file_get_contents($TelegramUrlSendMessage);
 //}
 //
 ////Questa è la funzione che utilizzo per salvare il json nei file

@@ -54,12 +54,22 @@ function getTurni($year, $week)
 function getDay($d)
 {
     $day = [
-        'Tuesday' => '1',
+        'Monday' => '1',
         'Thursday' => '2',
         'Saturday' => '3',
         'Sunday' => '3'
     ];
     return $day[$d];
+}
+function getDayNoParam()
+{
+    $day = [
+        'Monday' => '1',
+        'Thursday' => '2',
+        'Saturday' => '3',
+        'Sunday' => '3'
+    ];
+    return $day;
 }
 
 function getTeam($team)
@@ -126,11 +136,11 @@ function getTagPartecipanti($nome)
             'chat_name' => '@jenko_11'
         ],
         'Rocco' => [
-            'id' => '126810558',
+            'id' => '354008242', //'126810558',
             'chat_name' => '@rolud'
         ],
         'Bruno' => [
-            'id' => '62339004',
+            'id' => '354008242',//'62339004',
             'chat_name' => '@Semone96'
         ],
         'Tutti' => [
