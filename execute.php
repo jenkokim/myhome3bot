@@ -6,13 +6,11 @@ define('api', "https://api.telegram.org/bot" . $token . "/");
 
 $data = file_get_contents("php://input");
 $update = json_decode($data, true);
-//saveInJsonFile($update, "ricevuto.json");
 
 $message = $update['message'];
 $text = $message['text'];
 $cid = $update['message']['from']['id'];
 $groupid = $update['message']['chat']['id'];
-
 
 
 $text = explode('@', $text);
@@ -36,17 +34,6 @@ function chat($id, $text)
     return apiRequest("getChat?chat_id=$id");
 }
 
-//if ($text == "/chat") {
-//    foreach ($partecipanti as $p):
-//        $id = $p['id'];
-//        $nome = $p['chat_name'];
-//        send("$id", "$nome");
-//    endforeach;
-//
-//}
-
-//saveInJsonFile($prova, "inviato.json");
-
 
 if ($text[0] == "/week") {
     $week = date('W');
@@ -61,7 +48,7 @@ if ($text[0] == "/week") {
     $tag2 = getTagPartecipanti($week_team[2]);
     $tag3 = getTagPartecipanti($week_team[3]);
 
-    $mex =$today . "%0AQuesta settimana:%0A%0AMartedì (Bagno):%0A" . $week_team[1] . " " . $tag1 . "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 . "%0A%0AWeekend (Casa):%0A" . $week_team[3] . " " . $tag3;
+    $mex = $today . "%0AQuesta settimana:%0A%0AMartedì (Bagno):%0A" . $week_team[1] . " " . $tag1 . "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 . "%0A%0AWeekend (Casa):%0A" . $week_team[3] . " " . $tag3;
 
 
     send($groupid, $mex);
@@ -82,20 +69,18 @@ while (true):
 
         $pulitore = $settimana[$turno]; //prendo chi deve fare le pulizie
 
-       // echo date('H.i.s.v.u');
-        if ((date('G') == 11 || (date('G') == 12) || (date('G') == 13))):
+        if ((date('G') == 16 || (date('G') == 17) || (date('G') == 18))):
 
-            if ((date('i') == 27)||(date('i') == 28)||(date('i') == 29)||(date('i') == 30)):
+            if ((date('i') == 40) || (date('i') == 41) || (date('i') == 42) || (date('i') == 43)):
 
                 if ((date('s') == 30) || (date('s') == 10) || (date('s') == 20)) :
 
 
-                //    echo $pulitore;
                     $today = getDataOdierna();
                     $section = getPulizie($turno);
                     $tag = getTagPartecipanti($pulitore);
-                    $oggi_orario=date('H.i.s');
-                    $text =$today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
+                    $oggi_orario = date('H.i.s');
+                    $text = $today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
                     $id = getPartecipanti($pulitore);
                     send($id, $text);
                     sleep(5);
@@ -105,12 +90,6 @@ while (true):
         endif;
     endif;
 endwhile;
-//foreach (getDay(date('l')) as $item) :
-//  var_dump( getDay(date('l')));
-//$item==date('l');
-//endforeach;
-
-//echo $day;
 
 
 //$firstname = isset($message['chat']['first_name']) ? $message['chat']['first_name'] : "";
