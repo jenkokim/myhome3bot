@@ -12,6 +12,7 @@ $message = $update['message'];
 $text = $message['text'];
 $cid = $update['message']['from']['id'];
 $groupid = $update['message']['chat']['id'];
+$oggi_orario=date('H.i.s.v.u');
 
 
 $text = explode('@', $text);
@@ -60,7 +61,7 @@ if ($text[0] == "/week") {
     $tag2 = getTagPartecipanti($week_team[2]);
     $tag3 = getTagPartecipanti($week_team[3]);
 
-    $mex = $today . "%0AQuesta settimana:%0A%0AMartedì (Bagno):%0A" . $week_team[1] . " " . $tag1 . "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 . "%0A%0AWeekend (Casa):%0A" . $week_team[3] . " " . $tag3;
+    $mex =$oggi_orario. $today . "%0AQuesta settimana:%0A%0AMartedì (Bagno):%0A" . $week_team[1] . " " . $tag1 . "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 . "%0A%0AWeekend (Casa):%0A" . $week_team[3] . " " . $tag3;
 
 
     send($groupid, $mex);
@@ -81,10 +82,10 @@ while (true):
 
         $pulitore = $settimana[$turno]; //prendo chi deve fare le pulizie
 
-        echo date('H.i.s.v.u');
+       // echo date('H.i.s.v.u');
         if ((date('G') == 11 || (date('G') == 12) || (date('G') == 13))):
 
-            if (date('i') == 18):
+            if ((date('i') == 21)||(date('i') == 22)||(date('i') == 23)||(date('i') == 24)):
 
                 if ((date('s') == 30) || (date('s') == 10) || (date('s') == 20)) :
 
@@ -93,8 +94,8 @@ while (true):
                     $today = getDataOdierna();
                     $section = getPulizie($turno);
                     $tag = getTagPartecipanti($pulitore);
-$oggi=date('H.i.s.v.u');
-                    $text =$oggi. $today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
+
+                    $text =$oggi_orario. $today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
                     $id = getPartecipanti($pulitore);
                     send($id, $text);
                     sleep(5);
