@@ -65,39 +65,45 @@ if ($text[0] == "/week") {
 
     send($groupid, $mex);
 }
-var_dump(date('s'));
-//while (true):
-$day = getDayNoParam(); //prendo l'array dei giorni per confrontarlo con il giorno attuale
-if (array_key_exists(date('l'), $day)): //confronto con il giorno attuale per inviare la notifica se risulta
-    $year = date('Y'); //prendo l'anno
+while (true):
+    $day = getDayNoParam(); //prendo l'array dei giorni per confrontarlo con il giorno attuale
+    if (array_key_exists(date('l'), $day))://confronto con il giorno attuale per inviare la notifica se risulta
 
-    $week = date('W');//prendo la settimana
+        $year = date('Y'); //prendo l'anno
 
-    $team = getTurni($year, $week); //prendo i turni di quella settimana
+        $week = date('W');//prendo la settimana
 
-    $settimana = getTeam($team); //prendo il team di quella settimana
+        $team = getTurni($year, $week); //prendo i turni di quella settimana
 
-    $turno = getDay(date('l'));  //prendo il numero associato al giorno
+        $settimana = getTeam($team); //prendo il team di quella settimana
 
-    $pulitore = $settimana[$turno]; //prendo chi deve fare le pulizie
+        $turno = getDay(date('l'));  //prendo il numero associato al giorno
+
+        $pulitore = $settimana[$turno]; //prendo chi deve fare le pulizie
+
+        echo date('H.i.s.v.u');
+        if ((date('G') == 11 || (date('G') == 14) || (date('G') == 18))):
+
+            if (date('i') == 30):
+
+                if ((date('s') == 30) || (date('s') == 10) || (date('s') == 20)) :
 
 
-    if ((date('G') == 12 || (date('G') == 14) || (date('G') == 18))):
-        if (date('i') == 54):
-            if (date('s') == 00):
-                $today = getDataOdierna();
-                $section = getPulizie($turno);
-                $tag=getTagPartecipanti($pulitore);
+                    echo $pulitore;
+                    $today = getDataOdierna();
+                    $section = getPulizie($turno);
+                    $tag = getTagPartecipanti($pulitore);
 
-                $text = $today . "%0AEhi " . $tag . " oggi devi lavare: " . $section;
-                $id=getPartecipanti($pulitore);
-                send($id,$text);
+                    $text = $today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
+                    $id = getPartecipanti($pulitore);
+                    send($id, $text);
+                    sleep(5);
+                endif;
             endif;
-        endif;
 
+        endif;
     endif;
-endif;
-//endwhile;
+endwhile;
 //foreach (getDay(date('l')) as $item) :
 //  var_dump( getDay(date('l')));
 //$item==date('l');
