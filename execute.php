@@ -33,7 +33,7 @@ function chat($id, $text)
     }
     return apiRequest("getChat?chat_id=$id");
 }
-
+while (true):
 
 if ($text[0] == "/week") {
     $week = date('W');
@@ -53,7 +53,7 @@ if ($text[0] == "/week") {
 
     send($groupid, $mex);
 }
-while (true):
+
     $day = getDayNoParam(); //prendo l'array dei giorni per confrontarlo con il giorno attuale
     if (array_key_exists(date('l'), $day))://confronto con il giorno attuale per inviare la notifica se risulta
 
@@ -71,7 +71,7 @@ while (true):
 
         if ((date('G') == 16 || (date('G') == 17) || (date('G') == 18))):
 
-            if ((date('i') == 40) || (date('i') == 41) || (date('i') == 42) || (date('i') == 43)):
+            if ((date('i') == 44) || (date('i') == 45) || (date('i') == 46) || (date('i') == 43)):
 
                 if ((date('s') == 30) || (date('s') == 10) || (date('s') == 20)) :
 
