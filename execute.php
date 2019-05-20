@@ -56,9 +56,9 @@ while (true):
 
         $pulitore = $settimana[$turno]; //prendo chi deve fare le pulizie
 
-        if ((date('G') == 20 || (date('G') == 19) || (date('G') == 21))):
+        if ((date('G') == 22 || (date('G') == 20) || (date('G') == 00))):
 
-            if (date('i') == 46):
+            if (date('i') == 47):
 
                 if (date('s') == 20) :
 
