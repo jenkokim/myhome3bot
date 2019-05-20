@@ -36,7 +36,7 @@ if ($text[0] == "/week") {
     send($groupid, $mex);
 }
 
-while (true):
+//while (true):
 
 
     $day = getDayNoParam(); //prendo l'array dei giorni per confrontarlo con il giorno attuale
@@ -75,7 +75,7 @@ while (true):
         endif;
     endif;
 
-endwhile;
+//endwhile;
 
 //$firstname = isset($message['chat']['first_name']) ? $message['chat']['first_name'] : "";
 //$lastname = isset($message['chat']['last_name']) ? $message['chat']['last_name'] : "";
