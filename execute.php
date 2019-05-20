@@ -66,7 +66,7 @@ if ($text[0] == "/week") {
     send($groupid, $mex);
 }
 var_dump(date('s'));
-while (true):
+//while (true):
 $day = getDayNoParam(); //prendo l'array dei giorni per confrontarlo con il giorno attuale
 if (array_key_exists(date('l'), $day)): //confronto con il giorno attuale per inviare la notifica se risulta
     $year = date('Y'); //prendo l'anno
@@ -97,7 +97,7 @@ if (array_key_exists(date('l'), $day)): //confronto con il giorno attuale per in
 
     endif;
 endif;
-endwhile;
+//endwhile;
 //foreach (getDay(date('l')) as $item) :
 //  var_dump( getDay(date('l')));
 //$item==date('l');
