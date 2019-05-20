@@ -41,23 +41,7 @@ if ($text[0] == "/week") {
     if (array_key_exists(date('l'), $day))://confronto con il giorno attuale per inviare la notifica se risulta
 
 
-        if ($text[0] == "/week") {
-            $week = date('W');
-            $year = date('Y');
-            $day = date('l');
-            $today = getDataOdierna();
 
-            $day = getDayIta($day);
-            $this_week = getTurni($year, $week);
-            $week_team = getTeam($this_week);
-            $tag1 = getTagPartecipanti($week_team[1]);
-            $tag2 = getTagPartecipanti($week_team[2]);
-            $tag3 = getTagPartecipanti($week_team[3]);
-
-            $mex = $today . "%0AQuesta settimana:%0A%0AMartedì (Bagno):%0A" . $week_team[1] . " " . $tag1 . "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 . "%0A%0AWeekend (Casa):%0A" . $week_team[3] . " " . $tag3;
-
-            send($groupid, $mex);
-        }
 
         $year = date('Y'); //prendo l'anno
 
@@ -73,18 +57,18 @@ if ($text[0] == "/week") {
 
         if ((date('G') == 20 || (date('G') == 19) || (date('G') == 18))):
 
-            if (date('i') == 37):
+            if (date('i') == 40):
 
-                if (date('s') == 40) :
+                if (date('s') == 30) :
 
 
                     $today = getDataOdierna();
                     $section = getPulizie($turno);
                     $tag = getTagPartecipanti($pulitore);
                     $oggi_orario = date('H.i.s');
-                    $text = $today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
+                    $testo = $today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
                     $id = getPartecipanti($pulitore);
-                    send($id, $text);
+                    send($id, $testo);
                     sleep(5);
                 endif;
             endif;
