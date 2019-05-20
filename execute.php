@@ -65,6 +65,7 @@ if ($text[0] == "/week") {
 
     send($groupid, $mex);
 }
+var_dump(date('s'));
 while (true):
 $day = getDayNoParam(); //prendo l'array dei giorni per confrontarlo con il giorno attuale
 if (array_key_exists(date('l'), $day)): //confronto con il giorno attuale per inviare la notifica se risulta
@@ -82,8 +83,8 @@ if (array_key_exists(date('l'), $day)): //confronto con il giorno attuale per in
 
 
     if ((date('G') == 12 || (date('G') == 14) || (date('G') == 18))):
-        if (date('i') == 52):
-            if (date('s') == 30):
+        if (date('i') == 54):
+            if (date('s') == 00):
                 $today = getDataOdierna();
                 $section = getPulizie($turno);
                 $tag=getTagPartecipanti($pulitore);
