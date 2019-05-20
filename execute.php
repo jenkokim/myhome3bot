@@ -13,9 +13,9 @@ $cid = $update['message']['from']['id'];
 $groupid = $update['message']['chat']['id'];
 
 
-//if ($text[0] == "/start") {
-//    $prova = send($cid, "Benvenuto sul bot, il tuo id è $cid");
-//}
+if ($text[0] == "/start") {
+    $prova = send($cid, "Benvenuto sul bot, il tuo id è $cid");
+}
 
 
 if ($text[0] == "/week") {
@@ -56,18 +56,18 @@ while (true):
 
         $pulitore = $settimana[$turno]; //prendo chi deve fare le pulizie
 
-        if ((date('G') == 20 || (date('G') == 19) || (date('G') == 18))):
+        if ((date('G') == 20 || (date('G') == 19) || (date('G') == 21))):
 
-            if (date('i') == 44):
+            if (date('i') == 46):
 
-                if (date('s') == 30) :
+                if (date('s') == 20) :
 
 
                     $today = getDataOdierna();
                     $section = getPulizie($turno);
                     $tag = getTagPartecipanti($pulitore);
                     $oggi_orario = date('H.i.s');
-                    $testo = $today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
+                    $testo =$oggi_orario. $today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
                     $id = getPartecipanti($pulitore);
                     send($id, $testo);
                     sleep(5);
