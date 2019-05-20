@@ -4,7 +4,7 @@ include 'utlis.php';
 $token = "668920983:AAH5OAvntJoUGWEDjE9CKQ9P4nQdY5MybxI";
 define('api', "https://api.telegram.org/bot" . $token . "/");
 
-while (true):
+
 $data = file_get_contents("php://input");
 $update = json_decode($data, true);
 
@@ -40,6 +40,25 @@ if ($text[0] == "/week") {
     $day = getDayNoParam(); //prendo l'array dei giorni per confrontarlo con il giorno attuale
     if (array_key_exists(date('l'), $day))://confronto con il giorno attuale per inviare la notifica se risulta
 
+
+        if ($text[0] == "/week") {
+            $week = date('W');
+            $year = date('Y');
+            $day = date('l');
+            $today = getDataOdierna();
+
+            $day = getDayIta($day);
+            $this_week = getTurni($year, $week);
+            $week_team = getTeam($this_week);
+            $tag1 = getTagPartecipanti($week_team[1]);
+            $tag2 = getTagPartecipanti($week_team[2]);
+            $tag3 = getTagPartecipanti($week_team[3]);
+
+            $mex = $today . "%0AQuesta settimana:%0A%0AMartedì (Bagno):%0A" . $week_team[1] . " " . $tag1 . "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 . "%0A%0AWeekend (Casa):%0A" . $week_team[3] . " " . $tag3;
+
+            send($groupid, $mex);
+        }
+
         $year = date('Y'); //prendo l'anno
 
         $week = date('W');//prendo la settimana
@@ -52,9 +71,9 @@ if ($text[0] == "/week") {
 
         $pulitore = $settimana[$turno]; //prendo chi deve fare le pulizie
 
-        if ((date('G') == 19 || (date('G') == 17) || (date('G') == 18))):
+        if ((date('G') == 20 || (date('G') == 19) || (date('G') == 18))):
 
-            if (date('i') == 23):
+            if (date('i') == 37):
 
                 if (date('s') == 40) :
 
@@ -72,7 +91,7 @@ if ($text[0] == "/week") {
 
         endif;
     endif;
-endwhile;
+
 
 
 //$firstname = isset($message['chat']['first_name']) ? $message['chat']['first_name'] : "";
