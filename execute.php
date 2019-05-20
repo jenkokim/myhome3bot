@@ -84,17 +84,17 @@ while (true):
         echo date('H.i.s.v.u');
         if ((date('G') == 11 || (date('G') == 12) || (date('G') == 13))):
 
-            if (date('i') == 14):
+            if (date('i') == 16):
 
                 if ((date('s') == 30) || (date('s') == 10) || (date('s') == 20)) :
 
 
-                    echo $pulitore;
+                //    echo $pulitore;
                     $today = getDataOdierna();
                     $section = getPulizie($turno);
                     $tag = getTagPartecipanti($pulitore);
-
-                    $text = $today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
+$oggi=date('H.i.s.v.u');
+                    $text =$oggi. $today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
                     $id = getPartecipanti($pulitore);
                     send($id, $text);
                     sleep(5);
