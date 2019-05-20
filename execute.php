@@ -35,14 +35,12 @@ if ($text[0] == "/week") {
 
     send($groupid, $mex);
 }
+
 while (true):
 
 
     $day = getDayNoParam(); //prendo l'array dei giorni per confrontarlo con il giorno attuale
     if (array_key_exists(date('l'), $day))://confronto con il giorno attuale per inviare la notifica se risulta
-
-
-
 
         $year = date('Y'); //prendo l'anno
 
@@ -58,9 +56,9 @@ while (true):
 
         if ((date('G') == 22 || (date('G') == 20) || (date('G') == 00))):
 
-            if (date('i') == 47):
+            if (date('i') == 51):
 
-                if (date('s') == 20) :
+                if (date('s') == 00) :
 
 
                     $today = getDataOdierna();
