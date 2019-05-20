@@ -80,13 +80,16 @@ if (array_key_exists(date('l'), $day)): //confronto con il giorno attuale per in
 
     $pulitore = $settimana[$turno]; //prendo chi deve fare le pulizie
 
+
     if ((date('G') == 12 || (date('G') == 14) || (date('G') == 18))):
-        if (date('i') == 46):
+        if (date('i') == 52):
             if (date('s') == 00):
                 $today = getDataOdierna();
                 $section = getPulizie($turno);
-                $text = $today . "%0AEhi " . $pulitore['chat_name'] . " oggi devi lavare: " . $section;
-                $id=$pulitore['id'];
+                $tag=getTagPartecipanti($pulitore);
+
+                $text = $today . "%0AEhi " . $tag . " oggi devi lavare: " . $section;
+                $id=getPartecipanti($pulitore);
                 send($id,$text);
             endif;
         endif;

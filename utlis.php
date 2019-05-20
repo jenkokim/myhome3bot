@@ -151,6 +151,29 @@ function getTagPartecipanti($nome)
     return $partecipanti[$nome]['chat_name'];
 }
 
+function getPartecipanti($nome)
+{
+
+    $partecipanti = [
+        'Giovanni' => [
+            'id' => '354008242',
+            'chat_name' => '@jenko_11'
+        ],
+        'Rocco' => [
+            'id' => '354008242', //'126810558',
+            'chat_name' => '@rolud'
+        ],
+        'Bruno' => [
+            'id' => '354008242',//'62339004',
+            'chat_name' => '@Semone96'
+        ],
+        'Tutti' => [
+            'id' => '',
+            'chat_name' => '@jenko_11 , @rolud , @Semone96'
+        ],
+    ];
+    return $partecipanti[$nome]['id'];
+}
 
 function getMesiIta($mese){
 
