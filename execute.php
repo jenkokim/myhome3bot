@@ -12,7 +12,6 @@ $text = $message['text'];
 $cid = $update['message']['from']['id'];
 $groupid = $update['message']['chat']['id'];
 
-while (true):
 
 //if ($text[0] == "/start") {
 //    $prova = send($cid, "Benvenuto sul bot, il tuo id è $cid");
@@ -36,6 +35,8 @@ if ($text[0] == "/week") {
 
     send($groupid, $mex);
 }
+while (true):
+
 
     $day = getDayNoParam(); //prendo l'array dei giorni per confrontarlo con il giorno attuale
     if (array_key_exists(date('l'), $day))://confronto con il giorno attuale per inviare la notifica se risulta
@@ -57,7 +58,7 @@ if ($text[0] == "/week") {
 
         if ((date('G') == 20 || (date('G') == 19) || (date('G') == 18))):
 
-            if (date('i') == 43):
+            if (date('i') == 44):
 
                 if (date('s') == 30) :
 
