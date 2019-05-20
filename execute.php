@@ -84,7 +84,7 @@ while (true):
         echo date('H.i.s.v.u');
         if ((date('G') == 11 || (date('G') == 12) || (date('G') == 13))):
 
-            if (date('i') == 16):
+            if (date('i') == 18):
 
                 if ((date('s') == 30) || (date('s') == 10) || (date('s') == 20)) :
 
