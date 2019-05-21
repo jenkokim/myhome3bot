@@ -5,7 +5,9 @@ $token = "668920983:AAH5OAvntJoUGWEDjE9CKQ9P4nQdY5MybxI";
 define('api', "https://api.telegram.org/bot" . $token . "/");
 
 $data = file_get_contents("php://input");
+file_put_contents('log.json',$data);
 $update = json_decode($data, true);
+
 
 $message = $update['message'];
 $text = $message['text'];
