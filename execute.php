@@ -36,7 +36,7 @@ if ($text == "/week") {
     send($groupid, $mex);
 }
 
-//while (true):
+while (true):
 
 
     $day = getDayNoParam(); //prendo l'array dei giorni per confrontarlo con il giorno attuale
@@ -54,9 +54,9 @@ if ($text == "/week") {
 
         $pulitore = $settimana[$turno]; //prendo chi deve fare le pulizie
 
-        if ((date('G') == 22 || (date('G') == 20) || (date('G') == 00))):
+        if ((date('G') == 14 || (date('G') == 15) || (date('G') == 16))):
 
-            if (date('i') == 51):
+            if (date('i') == 02):
 
                 if (date('s') == 00) :
 
@@ -75,7 +75,7 @@ if ($text == "/week") {
         endif;
     endif;
 
-//endwhile;
+endwhile;
 
 //$firstname = isset($message['chat']['first_name']) ? $message['chat']['first_name'] : "";
 //$lastname = isset($message['chat']['last_name']) ? $message['chat']['last_name'] : "";
