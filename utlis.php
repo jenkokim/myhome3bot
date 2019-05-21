@@ -59,7 +59,7 @@ function getTurni($year, $week)
 function getDay($d)
 {
     $day = [
-        'Monday' => '1',
+        'Tuesday' => '1',
         'Thursday' => '2',
         'Saturday' => '3',
         'Sunday' => '3'
@@ -69,7 +69,7 @@ function getDay($d)
 function getDayNoParam()
 {
     $day = [
-        'Monday' => '1',
+        'Tuesday' => '1',
         'Thursday' => '2',
         'Saturday' => '3',
         'Sunday' => '3'

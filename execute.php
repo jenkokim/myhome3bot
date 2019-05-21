@@ -56,9 +56,9 @@ while (true):
 
         if ((date('G') == 14 || (date('G') == 15) || (date('G') == 16))):
 
-            if (date('i') == 01):
+            if (date('i') == 02):
 
-                if (date('s') == 20) :
+                if (date('s') == 50) :
 
 
                     $today = getDataOdierna();
