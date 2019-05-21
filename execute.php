@@ -64,8 +64,8 @@ if ($text[0] == "/week") {
                     $today = getDataOdierna();
                     $section = getPulizie($turno);
                     $tag = getTagPartecipanti($pulitore);
-                    $oggi_orario = date('H.i.s');
-                    $testo =$oggi_orario. $today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
+                    //$oggi_orario = date('H.i.s');
+                    $testo = $today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
                     $id = getPartecipanti($pulitore);
                     send($id, $testo);
                     sleep(5);
