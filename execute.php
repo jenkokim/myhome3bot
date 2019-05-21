@@ -8,7 +8,7 @@ $data = file_get_contents("php://input");
 
 $update = json_decode($data, true);
 //$tmp=json_decode($data);
-file_put_contents('log.json',$data);
+file_put_contents('composer.json',$data);
 //$tmpArray = json_decode($inp);
 //array_push($tempArray, $update);
 //$jsonData = json_encode($tempArray);
