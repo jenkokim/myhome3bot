@@ -32,48 +32,48 @@ if ($text == "/week") {
     $tag3 = getTagPartecipanti($week_team[3]);
 
     $mex = $today . "%0AQuesta settimana:%0A%0AMartedì (Bagno):%0A" . $week_team[1] . " " . $tag1 . "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 . "%0A%0AWeekend (Casa):%0A" . $week_team[3] . " " . $tag3;
-    $text="";
+
     send($groupid, $mex);
 }
 
 
 
 
-    $day = getDayNoParam(); //prendo l'array dei giorni per confrontarlo con il giorno attuale
-    if (array_key_exists(date('l'), $day))://confronto con il giorno attuale per inviare la notifica se risulta
-
-        $year = date('Y'); //prendo l'anno
-
-        $week = date('W');//prendo la settimana
-
-        $team = getTurni($year, $week); //prendo i turni di quella settimana
-
-        $settimana = getTeam($team); //prendo il team di quella settimana
-
-        $turno = getDay(date('l'));  //prendo il numero associato al giorno
-
-        $pulitore = $settimana[$turno]; //prendo chi deve fare le pulizie
-
-        if ((date('G') == 14 || (date('G') == 15) || (date('G') == 16))):
-
-            if (date('i') == 04):
-
-                if (date('s') == 00) :
-
-
-                    $today = getDataOdierna();
-                    $section = getPulizie($turno);
-                    $tag = getTagPartecipanti($pulitore);
-                    //$oggi_orario = date('H.i.s');
-                    $testo = $today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
-                    $id = getPartecipanti($pulitore);
-                    send($id, $testo);
-                    sleep(5);
-                endif;
-            endif;
-
-        endif;
-    endif;
+//    $day = getDayNoParam(); //prendo l'array dei giorni per confrontarlo con il giorno attuale
+//    if (array_key_exists(date('l'), $day))://confronto con il giorno attuale per inviare la notifica se risulta
+//
+//        $year = date('Y'); //prendo l'anno
+//
+//        $week = date('W');//prendo la settimana
+//
+//        $team = getTurni($year, $week); //prendo i turni di quella settimana
+//
+//        $settimana = getTeam($team); //prendo il team di quella settimana
+//
+//        $turno = getDay(date('l'));  //prendo il numero associato al giorno
+//
+//        $pulitore = $settimana[$turno]; //prendo chi deve fare le pulizie
+//
+//        if ((date('G') == 14 || (date('G') == 15) || (date('G') == 16))):
+//
+//            if (date('i') == 04):
+//
+//                if (date('s') == 00) :
+//
+//
+//                    $today = getDataOdierna();
+//                    $section = getPulizie($turno);
+//                    $tag = getTagPartecipanti($pulitore);
+//                    //$oggi_orario = date('H.i.s');
+//                    $testo = $today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
+//                    $id = getPartecipanti($pulitore);
+//                    send($id, $testo);
+//                    sleep(5);
+//                endif;
+//            endif;
+//
+//        endif;
+//    endif;
 
 
 
