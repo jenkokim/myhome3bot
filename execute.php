@@ -16,7 +16,6 @@ $groupid = $update['message']['chat']['id'];
 if ($text == "/start") {
     $prova = send($cid, "Benvenuto sul bot, il tuo id è $cid");
 }
-while (true):
 
 if ($text == "/week") {
 
@@ -76,7 +75,7 @@ if ($text == "/week") {
         endif;
     endif;
 
-endwhile;
+
 
 //$firstname = isset($message['chat']['first_name']) ? $message['chat']['first_name'] : "";
 //$lastname = isset($message['chat']['last_name']) ? $message['chat']['last_name'] : "";
