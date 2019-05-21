@@ -19,9 +19,10 @@ $update = json_decode($data, true);
 
 $message = $update['message'];
 $text = $message['text'];
-$cid = $update['message']['from']['id'];
+$cid = $update['message']['chat']['id'];
 $groupid = $update['message']['chat']['id'];
-
+$text_split=explode('@',$text);
+$text=$text_split[0];
 
 if ($text == "/start") {
     $prova = send($cid, "Benvenuto sul bot, il tuo id è $cid");
