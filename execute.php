@@ -24,6 +24,7 @@ $groupid = $update['message']['chat']['id'];
 $text_split=explode('@',$text);
 $text=$text_split[0];
 
+
 if ($text == "/start") {
     $prova = send($cid, "Benvenuto sul bot, il tuo id è $cid");
 }
