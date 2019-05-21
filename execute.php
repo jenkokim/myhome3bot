@@ -5,7 +5,15 @@ $token = "668920983:AAH5OAvntJoUGWEDjE9CKQ9P4nQdY5MybxI";
 define('api', "https://api.telegram.org/bot" . $token . "/");
 
 $data = file_get_contents("php://input");
-file_put_contents('log.json',$data);
+
+
+$inp = file_get_contents('log.json');
+$tmpArray = json_decode($inp);
+array_push($tempArray, $data);
+$jsonData = json_encode($tempArray);
+file_put_contents('log.json', $jsonData);
+
+
 $update = json_decode($data, true);
 
 
