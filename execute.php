@@ -13,12 +13,12 @@ $cid = $update['message']['from']['id'];
 $groupid = $update['message']['chat']['id'];
 
 
-if ($text[0] == "/start") {
+if ($text == "/start") {
     $prova = send($cid, "Benvenuto sul bot, il tuo id è $cid");
 }
 
 
-if ($text[0] == "/week") {
+if ($text == "/week") {
     $week = date('W');
     $year = date('Y');
     $day = date('l');
