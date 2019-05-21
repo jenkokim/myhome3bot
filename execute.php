@@ -16,9 +16,10 @@ $groupid = $update['message']['chat']['id'];
 if ($text == "/start") {
     $prova = send($cid, "Benvenuto sul bot, il tuo id è $cid");
 }
-
+while (true):
 
 if ($text == "/week") {
+
     $week = date('W');
     $year = date('Y');
     $day = date('l');
@@ -32,11 +33,11 @@ if ($text == "/week") {
     $tag3 = getTagPartecipanti($week_team[3]);
 
     $mex = $today . "%0AQuesta settimana:%0A%0AMartedì (Bagno):%0A" . $week_team[1] . " " . $tag1 . "%0A%0AGiovedì (Bagno e Cucina):%0A" . $week_team[2] . " " . $tag2 . "%0A%0AWeekend (Casa):%0A" . $week_team[3] . " " . $tag3;
-
+    $text="";
     send($groupid, $mex);
 }
 
-while (true):
+
 
 
     $day = getDayNoParam(); //prendo l'array dei giorni per confrontarlo con il giorno attuale
