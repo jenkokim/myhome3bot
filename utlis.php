@@ -62,7 +62,7 @@ function getDay($d)
         'Tuesday' => '1',
         'Thursday' => '2',
         'Saturday' => '3',
-        'Sunday' => '3'
+        'Friday' => '3'
     ];
     return $day[$d];
 }
@@ -72,7 +72,7 @@ function getDayNoParam()
         'Tuesday' => '1',
         'Thursday' => '2',
         'Saturday' => '3',
-        'Sunday' => '3'
+        'Friday' => '3'
     ];
     return $day;
 }
