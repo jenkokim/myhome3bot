@@ -9,7 +9,7 @@ $tmp=$data;
 
 file_put_contents('log.json',$tmp, FILE_APPEND);
 
-
+send("354008242", "aaaa");
 //$tmp=json_decode($data);
 //$array=file_put_contents('log.json');
 //$tmpArray = json_decode($array);
