@@ -6,8 +6,6 @@ define('api', "https://api.telegram.org/bot" . $token . "/");
 
 $data = file_get_contents("php://input");
 $tmp=$data;
-$bo=file_get_contents('log.json');
-$bo2=json_decode($data);
 
 file_put_contents('log.json',$tmp, FILE_APPEND);
 
