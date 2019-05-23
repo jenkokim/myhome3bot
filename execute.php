@@ -53,7 +53,7 @@ if ($text == "/week") {
 if($text=="/ciao"){
     send($groupid,"suca");
 }
-
+var_dump(date('G.i.s'));
 
     $day = getDayNoParam();//prendo l'array dei giorni per confrontarlo con il giorno attuale
     if (array_key_exists(date('l'), $day))://confronto con il giorno attuale per inviare la notifica se risulta
