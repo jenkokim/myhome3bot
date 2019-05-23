@@ -6,8 +6,11 @@ define('api', "https://api.telegram.org/bot" . $token . "/");
 
 $data = file_get_contents("php://input");
 $tmp=$data;
+$bo=file_get_contents('log.json');
+$bo2=json_decode($data);
+
 file_put_contents('log.json',$tmp, FILE_APPEND);
-file_put_contents('log.json',"%0A");
+
 
 //$tmp=json_decode($data);
 //$array=file_put_contents('log.json');
@@ -49,7 +52,9 @@ if ($text == "/week") {
     send($groupid, $mex);
 }
 
-
+if($text=="ciao"){
+    send($cid,"suca");
+}
 
 
 //    $day = getDayNoParam(); //prendo l'array dei giorni per confrontarlo con il giorno attuale
