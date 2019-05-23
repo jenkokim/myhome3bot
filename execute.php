@@ -52,7 +52,7 @@ if ($text == "/week") {
     send($groupid, $mex);
 }
 
-if($text=="ciao"){
+if($text=="/ciao"){
     send($groupid,"suca");
 }
 
