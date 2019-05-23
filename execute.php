@@ -27,6 +27,7 @@ $text=$text_split[0];
 
 if ($text == "/start") {
     $prova = send($cid, "Benvenuto sul bot, il tuo id è $cid");
+    $provag = send($groupid, "Benvenuto sul bot, il tuo id è $groupid");
 }
 
 if ($text == "/week") {
