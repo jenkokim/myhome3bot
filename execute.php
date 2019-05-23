@@ -33,7 +33,7 @@ if ($text == "/start") {
     $provag = send($groupid, "Benvenuto sul bot, il tuo id è $groupid");
 }
 
-if ($text == "ciao") {
+if ($text == "/week") {
 
     $week = date('W');
     $year = date('Y');
@@ -53,7 +53,7 @@ if ($text == "ciao") {
 }
 
 if($text=="ciao"){
-    send($cid,"suca");
+    send($groupid,"suca");
 }
 
 
