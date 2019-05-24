@@ -5,25 +5,14 @@ $token = "668920983:AAH5OAvntJoUGWEDjE9CKQ9P4nQdY5MybxI";
 define('api', "https://api.telegram.org/bot" . $token . "/");
 
 $data = file_get_contents("php://input");
-$tmp=$data;
-
-file_put_contents('log.json',$tmp, FILE_APPEND);
-
-
-//$tmp=json_decode($data);
-//$array=file_put_contents('log.json');
-//$tmpArray = json_decode($array);
-//array_push($tempArray, json_decode($tmp));
-//$jsonData = json_encode($tempArray);
-//file_put_contents('log.json', $jsonData);
 $update = json_decode($data, true);
 
 $message = $update['message'];
 $text = $message['text'];
 $cid = $update['message']['chat']['id'];
 $groupid = $update['message']['chat']['id'];
-$text_split=explode('@',$text);
-$text=$text_split[0];
+$text_split = explode('@', $text);
+$text = $text_split[0];
 
 
 if ($text == "/start") {
@@ -50,51 +39,43 @@ if ($text == "/week") {
     send($groupid, $mex);
 }
 
-if($text=="/ciao"){
-    send($groupid,"suca");
-}
-var_dump(date('G.i.s'));
 
-    $day = getDayNoParam();//prendo l'array dei giorni per confrontarlo con il giorno attuale
-    if (array_key_exists(date('l'), $day))://confronto con il giorno attuale per inviare la notifica se risulta
+$day = getDayNoParam();//prendo l'array dei giorni per confrontarlo con il giorno attuale
 
-        $year = date('Y'); //prendo l'anno
+if (array_key_exists(date('l'), $day))://confronto con il giorno attuale per inviare la notifica se risulta
 
-        $week = date('W');//prendo la settimana
+    $year = date('Y'); //prendo l'anno
+    $week = date('W');//prendo la settimana
+    $team = getTurni($year, $week); //prendo i turni di quella settimana
+    $settimana = getTeam($team); //prendo il team di quella settimana
+    $turno = getDay(date('l'));  //prendo il numero associato al giorno
+    $pulitore = $settimana[$turno]; //prendo chi deve fare le pulizie
 
-        $team = getTurni($year, $week); //prendo i turni di quella settimana
+    if ((date('G') == 9 || (date('G') == 12) || (date('G') == 17))): //9 12 17
+        if ((date('i') > 1) || (date('i') < 59)):
 
-        $settimana = getTeam($team); //prendo il team di quella settimana
+            $today = getDataOdierna();
+            $section = getPulizie($turno);
+            $tag = getTagPartecipanti($pulitore);
 
-        $turno = getDay(date('l'));  //prendo il numero associato al giorno
+            if ($tag == 'all'):
+                $all = getAllPartecipanti();
 
-        $pulitore = $settimana[$turno]; //prendo chi deve fare le pulizie
+                foreach ($all as $a):
 
-        if ((date('G') == 23 || (date('G') == 00) || (date('G') == 01))):
+                    $testo = $today . " (" . $team . ")%0AEhi " . $a['chat_name'] . " oggi è la giornata del buon senso,devi lavare:%0A" . $section . " insieme agli altri!";
+                    send($a['id'], $testo);
 
-            if ((date('i') == 22) || (date('i') == 26) || (date('i') == 25) || (date('i') == 24)):
+                endforeach;
 
-          //      if (date('s') == 00) :
+            else:
 
+                $testo = $today . " (" . $team . ")%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
+                $id = getPartecipanti($pulitore);
+                send($id, $testo);
 
-                    $today = getDataOdierna();
-                    $section = getPulizie($turno);
-                    $tag = getTagPartecipanti($pulitore);
-                    //$oggi_orario = date('H.i.s');
-                    $testo = $today . "%0AEhi " . $tag . " oggi devi lavare:%0A" . $section;
-                    $id = getPartecipanti($pulitore);
-                    send($id, $testo);
-                    sleep(5);
-        //        endif;
             endif;
-
         endif;
     endif;
+endif;
 
-
-
-//$firstname = isset($message['chat']['first_name']) ? $message['chat']['first_name'] : "";
-//$lastname = isset($message['chat']['last_name']) ? $message['chat']['last_name'] : "";
-//$username = isset($message['chat']['username']) ? $message['chat']['username'] : "";
-//$date = isset($message['date']) ? $message['date'] : "";
-//$text = isset($message['text']) ? $message['text'] : "";

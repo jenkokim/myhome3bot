@@ -62,7 +62,7 @@ function getDay($d)
         'Tuesday' => '1',
         'Thursday' => '2',
         'Saturday' => '3',
-        'Friday' => '3'
+        'Sunday' => '3'
     ];
     return $day[$d];
 }
@@ -72,7 +72,7 @@ function getDayNoParam()
         'Tuesday' => '1',
         'Thursday' => '2',
         'Saturday' => '3',
-        'Friday' => '3'
+        'Sunday' => '3'
     ];
     return $day;
 }
@@ -141,19 +141,37 @@ function getTagPartecipanti($nome)
             'chat_name' => '@jenko_11'
         ],
         'Rocco' => [
-            'id' => '354008242', //'126810558',
+            'id' => '126810558',
             'chat_name' => '@rolud'
         ],
         'Bruno' => [
-            'id' => '354008242',//'62339004',
+            'id' => '62339004',
             'chat_name' => '@Semone96'
         ],
         'Tutti' => [
-            'id' => '',
-            'chat_name' => '@jenko_11 , @rolud , @Semone96'
+            'chat_name' => 'all'
         ],
     ];
     return $partecipanti[$nome]['chat_name'];
+}
+function getAllPartecipanti()
+{
+
+    $partecipanti = [
+        'Giovanni' => [
+            'id' => '354008242',
+            'chat_name' => '@jenko_11'
+        ],
+        'Rocco' => [
+            'id' => '126810558',
+            'chat_name' => '@rolud'
+        ],
+        'Bruno' => [
+            'id' => '62339004',
+            'chat_name' => '@Semone96'
+        ],
+    ];
+    return $partecipanti;
 }
 
 function getPartecipanti($nome)
@@ -165,16 +183,15 @@ function getPartecipanti($nome)
             'chat_name' => '@jenko_11'
         ],
         'Rocco' => [
-            'id' => '354008242', //'126810558',
+            'id' => '126810558',
             'chat_name' => '@rolud'
         ],
         'Bruno' => [
-            'id' => '354008242',//'62339004',
+            'id' => '62339004',
             'chat_name' => '@Semone96'
         ],
         'Tutti' => [
-            'id' => '',
-            'chat_name' => '@jenko_11 , @rolud , @Semone96'
+            'chat_name' => 'all'
         ],
     ];
     return $partecipanti[$nome]['id'];
