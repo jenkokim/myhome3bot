@@ -15,6 +15,16 @@ $text_split = explode('@', $text);
 $text = $text_split[0];
 
 
+if ($text == "/list") {
+    $sql= "select * from casa ; ";
+    $result=runPDOQuery($sql);
+    foreach ($result as $r):
+        $list.=$r['name']."%0A";
+    endforeach;
+  send($groupid,"cose da comprare:%0A".$list);
+}
+
+
 if ($text == "/start") {
     $prova = send($cid, "Benvenuto sul bot, il tuo id è $cid");
     $provag = send($groupid, "Benvenuto sul bot, il tuo id è $groupid");

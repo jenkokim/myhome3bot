@@ -1,4 +1,41 @@
 <?php
+
+//Username: vWKWiV5SAU
+//Database name: vWKWiV5SAU
+//Password: BVGfGXxhj0
+//Server: remotemysql.com
+//Port: 3306
+
+function getPDOconn(){
+
+    $host = 'remotemysql.com';
+    $dbname = 'vWKWiV5SAU';
+    $user = 'vWKWiV5SAU';
+    $password = 'BVGfGXxhj0';
+
+    try {
+        $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "Connected successfully";
+    } catch (PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
+    return $conn;
+}
+
+function runPDOQuery($query){
+
+    $conn = getPDOconn();
+    $result = array();
+    foreach ($conn->query($query) as $row) {
+        $result[] = $row;
+    }
+    $conn = null;
+    return $result;
+}
+
+
 function apiRequest($metodo)
 {
     $req = file_get_contents(api . $metodo);
