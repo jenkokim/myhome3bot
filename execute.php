@@ -5,7 +5,7 @@ $token = "668920983:AAH5OAvntJoUGWEDjE9CKQ9P4nQdY5MybxI";
 define('api', "https://api.telegram.org/bot" . $token . "/");
 
 $data = file_get_contents("php://input");
-file_put_contents('log.json',$data);
+file_put_contents('log.json', $data);
 $update = json_decode($data, true);
 
 $message = $update['message'];
@@ -13,23 +13,36 @@ $text = $message['text'];
 $cid = $update['message']['chat']['id'];
 $groupid = $update['message']['chat']['id'];
 $text_split = explode('@', $text);
+$text_split_remove = explode(' ', $text);
 $text = $text_split[0];
+$to_remove = $text_split_remove[1];
 
 
 if ($text == "/list") {
-    $sql= "select * from casa ; ";
-    $result=runPDOQuery($sql);
+    $sql = "select * from casa ; ";
+    $result = runPDOQuery($sql);
     foreach ($result as $r):
-        $list.=$r['id'].") ".$r['name']."%0A";
+        $list .= $r['id'] . ") " . $r['name'] . "%0A";
+
     endforeach;
-  send($groupid,"cose da comprare:%0A".$list);
+    send($groupid, "cose da comprare:%0A" . $list);
 }
-//
+
+    if ($text == "/add") :
+        if (empty($to_remove)):
+        send($groupid,"Scrivi \add seguito dal uno spazio e dall'articolo da inserire");
+        else:
+       // $sql = "select * from casa ; ";
+    //    $result = runPDOQuery($sql);
+      //  foreach ($result as $r):
+     ////       $list .= $r['id'] . ") " . $r['name'] . "%0A";
+     //   endforeach;
+        send($groupid, "ciao");
+    endif;
+endif;
 //$id =
 //
 //$sql="delete from casa where id = $id ;";
-
-
 
 
 if ($text == "/start") {
