@@ -12,13 +12,15 @@ $message = $update['message'];
 $text = $message['text'];
 $cid = $update['message']['chat']['id'];
 $groupid = $update['message']['chat']['id'];
+
 $text_split = explode('@', $text);
 $text_split_remove = explode(' ', $text);
 $text = $text_split[0];
+
 $to_remove = $text_split_remove[1];
 
 
-if ($text == "/list") {
+if ($text == "/list"):
     $sql = "select * from casa ; ";
     $result = runPDOQuery($sql);
     foreach ($result as $r):
@@ -26,18 +28,22 @@ if ($text == "/list") {
 
     endforeach;
     send($groupid, "cose da comprare:%0A" . $list);
-}
+endif;
 
-    if ($text == "/add") :
-        if (empty($to_remove)):
-        send($groupid,"Scrivi \add seguito dal uno spazio e dall'articolo da inserire");
-        else:
-       // $sql = "select * from casa ; ";
-    //    $result = runPDOQuery($sql);
-      //  foreach ($result as $r):
-     ////       $list .= $r['id'] . ") " . $r['name'] . "%0A";
-     //   endforeach;
-        send($groupid, "ciao");
+if ($text == "/add") :
+    if ($to_remove==""  ||  $to_remove==" "  || $to_remove==null):
+
+
+
+        send($groupid, "Scrivi \add seguito da uno spazio e dall'articolo da inserire");
+    else:
+
+         $sql = "INSERT INTO `casa` (`id`, `name`, `date`) VALUES (NULL, '$to_remove', CURRENT_TIMESTAMP); ";
+        //    $result = runPDOQuery($sql);
+        //  foreach ($result as $r):
+        ////       $list .= $r['id'] . ") " . $r['name'] . "%0A";
+        //   endforeach;
+        send($groupid, "L'oggetto ".$to_remove."è stato aggiunto!");
     endif;
 endif;
 //$id =
