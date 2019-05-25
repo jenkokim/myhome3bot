@@ -19,7 +19,7 @@ if ($text == "/list") {
     $sql= "select * from casa ; ";
     $result=runPDOQuery($sql);
     foreach ($result as $r):
-        $list.=$r['name']."%0A";
+        $list.=$r['id'].")".$r['name']."%0A";
     endforeach;
   send($groupid,"cose da comprare:%0A".$list);
 }
