@@ -12,7 +12,6 @@ $message = $update['message'];
 $text = $message['text'];
 $cid = $update['message']['chat']['id'];
 $groupid = $update['message']['chat']['id'];
-$text = '/add merda';
 $text_split = explode('@', $text);
 $text_split_remove = explode(' ', $text);
 $text = $text_split[0];
