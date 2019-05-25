@@ -40,9 +40,17 @@ if ($text == "/add") :
 endif;
 
 if ($text == "/remove") :
+    $sql = "select * from casa ; ";
+    $result = runPDOQuery($sql);
+    foreach ($result as $r):
+        $list .= $r['id'] . ") " . $r['name'] . "%0A";
+    endforeach;
+
     if ($item == "" || $item == " " || $item == null):
-        send($groupid, "Scrivi /remove seguito da uno spazio e dal numero dell'articolo da eliminare");
+        send($groupid, "Scrivi /remove seguito da uno spazio e dal numero dell'articolo da eliminare%0A".$list);
     else:
+
+
         $sql = "delete from casa where id = $item ;";
         runPDOQuery($sql);
         send($groupid, "L'oggetto numero " . $item . " è stato eliminato!");
