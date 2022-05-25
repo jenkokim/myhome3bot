@@ -177,14 +177,6 @@ function getTagPartecipanti($nome)
             'id' => '354008242',
             'chat_name' => '@jenko_11'
         ],
-        'Rocco' => [
-            'id' => '126810558',
-            'chat_name' => '@rolud'
-        ],
-        'Bruno' => [
-            'id' => '62339004',
-            'chat_name' => '@Semone96'
-        ],
         'Tutti' => [
             'chat_name' => 'all'
         ],
@@ -199,14 +191,6 @@ function getAllPartecipanti()
             'id' => '354008242',
             'chat_name' => '@jenko_11'
         ],
-        'Rocco' => [
-            'id' => '126810558',
-            'chat_name' => '@rolud'
-        ],
-        'Bruno' => [
-            'id' => '62339004',
-            'chat_name' => '@Semone96'
-        ],
     ];
     return $partecipanti;
 }
@@ -218,14 +202,6 @@ function getPartecipanti($nome)
         'Giovanni' => [
             'id' => '354008242',
             'chat_name' => '@jenko_11'
-        ],
-        'Rocco' => [
-            'id' => '126810558',
-            'chat_name' => '@rolud'
-        ],
-        'Bruno' => [
-            'id' => '62339004',
-            'chat_name' => '@Semone96'
         ],
         'Tutti' => [
             'chat_name' => 'all'
